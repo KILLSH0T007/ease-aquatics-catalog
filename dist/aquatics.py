@@ -12,7 +12,7 @@ COLORS = {
 }
 
 # The files on your PC (ensure these are in the same folder as this script)
-LOGO_FILE = "SimpleLogo.jpg"
+LOGO_FILE = "SimpleLogo.png"
 
 # --- FULL PLANT INVENTORY ---
 plants = [
