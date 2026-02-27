@@ -6,7 +6,6 @@ from PIL import Image, ImageDraw, ImageFont
 Image.MAX_IMAGE_PIXELS = None 
 
 # --- SETTINGS ---
-# --- SETTINGS ---
 GITHUB_USERNAME = "KILLSH0T007" 
 REPO_NAME = "ease-aquatics-catalog"
 
