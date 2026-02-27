@@ -12,7 +12,7 @@ COLORS = {
     "border": "#D1D1D6"             
 }
 
-LOGO_FILE = "/img/SimpleLogo.png"
+LOGO_FILE = "img/SimpleLogo.png"
 IMG_SUBDIR = "img" # Subdirectory inside dist
 
 def get_ip():
