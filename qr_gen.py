@@ -12,7 +12,7 @@ REPO_NAME = "ease-aquatics-catalog"
 # This matches your live GitHub Pages structure
 BASE_URL = f"https://{GITHUB_USERNAME}.github.io/{REPO_NAME}/dist"
 # Update this to .jpg to match your uploaded "Logo_Clean.jpg"
-LOGO_FILE = "Logo_Clean.jpg" 
+LOGO_FILE = "dist/img/SimpleLogo.png" 
 LABEL_DIR = "Final_Branded_Stickers"
 
 # --- BRAND PALETTE ---
