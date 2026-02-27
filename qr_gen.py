@@ -9,9 +9,10 @@ Image.MAX_IMAGE_PIXELS = None
 GITHUB_USERNAME = "KILLSH0T007" 
 REPO_NAME = "ease-aquatics-catalog"
 
-# This URL will be active once you enable GitHub Pages in settings
-BASE_URL = f"https://{GITHUB_USERNAME}.github.io/{REPO_NAME}"
-LOGO_FILE = "Logo_Clean.png"
+# This matches your live GitHub Pages structure
+BASE_URL = f"https://{GITHUB_USERNAME}.github.io/{REPO_NAME}/dist"
+# Update this to .jpg to match your uploaded "Logo_Clean.jpg"
+LOGO_FILE = "Logo_Clean.jpg" 
 LABEL_DIR = "Final_Branded_Stickers"
 
 # --- BRAND PALETTE ---
@@ -22,10 +23,17 @@ TEAL = (74, 158, 158, 255)
 TEXT_DARK = (45, 45, 48, 255) 
 BORDER_SILVER = (160, 162, 164, 255) 
 
+# --- FULL PLANT DATA (Synced with aquatics.py) ---
 plant_data = [
-    {"id": "anubias-nana-petite", "name": "Anubias Nana Petite", "care": "Very Easy", "light": "Low", "temp": "20-30°C", "co2": "Optional"},
     {"id": "monte-carlo", "name": "Monte Carlo", "care": "Medium", "light": "High", "temp": "22-28°C", "co2": "High"},
-    {"id": "pogo-helferi", "name": "Pogostemon Helferi", "care": "Medium", "light": "Med/High", "temp": "22-30°C", "co2": "Required"}
+    {"id": "pogo-helferi", "name": "Pogostemon Helferi", "care": "Medium", "light": "Med/High", "temp": "22-30°C", "co2": "Required"},
+    {"id": "crypt-wendtii", "name": "Cryptocoryne Wendtii", "care": "Easy", "light": "Low-Med", "temp": "20-28°C", "co2": "Optional"},
+    {"id": "anubias-nana-petite", "name": "Anubias Nana Petite", "care": "Very Easy", "light": "Low", "temp": "20-30°C", "co2": "Optional"},
+    {"id": "crypt-flamingo", "name": "Cryptocoryne Flamingo", "care": "Hard", "light": "High", "temp": "22-28°C", "co2": "High"},
+    {"id": "hairgrass-mini", "name": "Hairgrass Mini", "care": "Medium", "light": "Medium", "temp": "20-28°C", "co2": "Recommended"},
+    {"id": "staurogyne-repens", "name": "Staurogyne Repens", "care": "Easy", "light": "Medium", "temp": "20-28°C", "co2": "Recommended"},
+    {"id": "rotala-green", "name": "Rotala Green", "care": "Easy", "light": "Medium", "temp": "20-30°C", "co2": "Recommended"},
+    {"id": "weeping-moss", "name": "Weeping Moss", "care": "Easy", "light": "Low-Med", "temp": "18-26°C", "co2": "Optional"}
 ]
 
 def create_branded_sticker(plant):
@@ -64,15 +72,10 @@ def create_branded_sticker(plant):
 
     # 6. Plant Name & Manual Underline
     name_text = plant['name']
-    name_pos = (250, 230) # (x, y)
-    
-    # Draw the text
+    name_pos = (250, 230)
     draw.text(name_pos, name_text, fill=TEXT_DARK, font=f_name, anchor="ms")
-    
-    # Calculate text width for the underline
-    # Using textbbox to get the width of the string
     left, top, right, bottom = draw.textbbox(name_pos, name_text, font=f_name, anchor="ms")
-    underline_y = bottom + 5  # 5 pixels below the text
+    underline_y = bottom + 5
     draw.line([(left, underline_y), (right, underline_y)], fill=TEAL, width=3)
 
     # 7. Care Info Section
@@ -90,7 +93,7 @@ def create_branded_sticker(plant):
         draw.text((65, curr_y), label, fill=TEXT_DARK, font=f_label)
         draw.text((255, curr_y), val, fill=TEXT_DARK, font=f_val)
 
-    # 8. QR Code
+    # 8. QR Code pointing to live GitHub site
     qr_url = f"{BASE_URL}/{plant['id']}.html"
     qr = qrcode.QRCode(box_size=5, border=1) 
     qr.add_data(qr_url)
