@@ -8,112 +8,130 @@ Image.MAX_IMAGE_PIXELS = None
 # --- SETTINGS ---
 GITHUB_USERNAME = "KILLSH0T007" 
 REPO_NAME = "ease-aquatics-catalog"
-
-# This matches your live GitHub Pages structure
 BASE_URL = f"https://{GITHUB_USERNAME}.github.io/{REPO_NAME}/dist"
-# Update this to .jpg to match your uploaded "Logo_Clean.jpg"
 LOGO_FILE = "dist/img/SimpleLogo.png" 
 LABEL_DIR = "Final_Branded_Stickers"
 
-# --- BRAND PALETTE ---
-SILVER_METALLIC = (196, 198, 199, 255) 
-TRANSPARENT = (255, 255, 255, 0)
-WHITE = (255, 255, 255, 255)
-TEAL = (74, 158, 158, 255)
-TEXT_DARK = (45, 45, 48, 255) 
-BORDER_SILVER = (160, 162, 164, 255) 
 
-# --- FULL PLANT DATA (Synced with aquatics.py) ---
+# --- BRAND PALETTE ---
+GRADIENT_TOP = (175, 225, 225) 
+GRADIENT_BOTTOM = (255, 255, 255) 
+TEXT_DARK = (28, 28, 30) 
+CORNER_RADIUS = 45 
+
+# --- UPDATED PLANT DATA ---
 plant_data = [
-    {"id": "monte-carlo", "name": "Monte Carlo", "care": "Medium", "light": "High", "temp": "22-28°C", "co2": "High"},
-    {"id": "pogo-helferi", "name": "Pogostemon Helferi", "care": "Medium", "light": "Med/High", "temp": "22-30°C", "co2": "Required"},
-    {"id": "crypt-wendtii", "name": "Cryptocoryne Wendtii", "care": "Easy", "light": "Low-Med", "temp": "20-28°C", "co2": "Optional"},
-    {"id": "anubias-nana-petite", "name": "Anubias Nana Petite", "care": "Very Easy", "light": "Low", "temp": "20-30°C", "co2": "Optional"},
-    {"id": "crypt-flamingo", "name": "Cryptocoryne Flamingo", "care": "Hard", "light": "High", "temp": "22-28°C", "co2": "High"},
-    {"id": "hairgrass-mini", "name": "Hairgrass Mini", "care": "Medium", "light": "Medium", "temp": "20-28°C", "co2": "Recommended"},
-    {"id": "staurogyne-repens", "name": "Staurogyne Repens", "care": "Easy", "light": "Medium", "temp": "20-28°C", "co2": "Recommended"},
-    {"id": "rotala-green", "name": "Rotala Green", "care": "Easy", "light": "Medium", "temp": "20-30°C", "co2": "Recommended"},
-    {"id": "weeping-moss", "name": "Weeping Moss", "care": "Easy", "light": "Low-Med", "temp": "18-26°C", "co2": "Optional"}
+    {"id": "monte-carlo", "name": "Monte Carlo", "growth": "Fast", "co2": "High", "type": "Carpeting", "place": "Foreground"},
+    {"id": "pogo-helferi", "name": "Pogostemon Helferi", "growth": "Medium", "co2": "Required", "type": "Star Plant", "place": "Foreground/Mid"},
+    {"id": "crypt-wendtii", "name": "Cryptocoryne Wendtii", "growth": "Slow", "co2": "Optional", "type": "Rosette", "place": "Midground"},
+    {"id": "anubias-nana-petite", "name": "Anubias Nana Petite", "growth": "Very Slow", "co2": "Optional", "type": "Epiphyte", "place": "Hardscape"},
+    {"id": "crypt-flamingo", "name": "Cryptocoryne Flamingo", "growth": "Slow", "co2": "High", "type": "Rare Rosette", "place": "Midground"},
+    {"id": "hairgrass-mini", "name": "Hairgrass Mini", "growth": "Medium", "co2": "Recommended", "type": "Grass", "place": "Foreground"},
+    {"id": "staurogyne-repens", "name": "Staurogyne Repens", "growth": "Slow", "co2": "Recommended", "type": "Stem/Bushy", "place": "Foreground"},
+    {"id": "rotala-green", "name": "Rotala Green", "growth": "Fast", "co2": "Recommended", "type": "Stem", "place": "Background"},
+    {"id": "weeping-moss", "name": "Weeping Moss", "growth": "Slow", "co2": "Optional", "type": "Moss", "place": "Hardscape"}
 ]
 
+def create_gradient_canvas(width, height):
+    base = Image.new('RGB', (width, height), GRADIENT_TOP)
+    for y in range(height):
+        r = int(GRADIENT_TOP[0] + (GRADIENT_BOTTOM[0] - GRADIENT_TOP[0]) * (y / height))
+        g = int(GRADIENT_TOP[1] + (GRADIENT_BOTTOM[1] - GRADIENT_TOP[1]) * (y / height))
+        b = int(GRADIENT_TOP[2] + (GRADIENT_BOTTOM[2] - GRADIENT_TOP[2]) * (y / height))
+        for x in range(width):
+            base.putpixel((x, y), (r, g, b))
+    return base
+
+def add_corners(im, rad):
+    circle = Image.new('L', (rad * 2, rad * 2), 0)
+    draw = ImageDraw.Draw(circle)
+    draw.ellipse((0, 0, rad * 2 - 1, rad * 2 - 1), fill=255)
+    alpha = Image.new('L', im.size, 255)
+    w, h = im.size
+    alpha.paste(circle.crop((0, 0, rad, rad)), (0, 0))
+    alpha.paste(circle.crop((0, rad, rad, rad * 2)), (0, h - rad))
+    alpha.paste(circle.crop((rad, 0, rad * 2, rad)), (w - rad, 0))
+    alpha.paste(circle.crop((rad, rad, rad * 2, rad * 2)), (w - rad, h - rad))
+    im.putalpha(alpha)
+    return im
+
 def create_branded_sticker(plant):
-    # 1. Canvas Setup (RGBA)
-    canvas = Image.new('RGBA', (500, 800), color=TRANSPARENT)
+    canvas = create_gradient_canvas(500, 800)
+    canvas = canvas.convert("RGBA")
     draw = ImageDraw.Draw(canvas)
     
-    # 2. Draw Silver Sticker Body
-    sticker_shape = [15, 15, 485, 785]
-    radius = 35
-    draw.rounded_rectangle(sticker_shape, radius=radius, fill=SILVER_METALLIC)
+    font_path = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
     
-    # 3. Border Details
-    draw.rounded_rectangle(sticker_shape, radius=radius, outline=BORDER_SILVER, width=3)
-    draw.rounded_rectangle([22, 22, 478, 778], radius=30, outline=BORDER_SILVER, width=1)
-    
-    # 4. Add Logo
-    try:
-        logo = Image.open(LOGO_FILE).convert("RGBA")
-        logo.thumbnail((380, 160)) 
-        x_logo = (500 - logo.width) // 2
-        y_logo = 35 
-        canvas.paste(logo, (x_logo, y_logo), logo)
-    except:
-        draw.text((250, 80), "Ease-Aquatics™", fill=TEAL, anchor="ms")
-
-    # 5. Load Fonts
-    try:
-        font_path = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
-        f_name = ImageFont.truetype(font_path, 35)
-        f_label = ImageFont.truetype(font_path, 28)
-        f_val = ImageFont.truetype(font_path, 28)
-        f_btn = ImageFont.truetype(font_path, 24)
-    except:
-        f_name = f_label = f_val = f_btn = ImageFont.load_default()
-
-    # 6. Plant Name & Manual Underline
+    # --- DYNAMIC FONT SCALING FOR NAME ---
+    current_font_size = 52 # Starting size
     name_text = plant['name']
-    name_pos = (250, 230)
-    draw.text(name_pos, name_text, fill=TEXT_DARK, font=f_name, anchor="ms")
-    left, top, right, bottom = draw.textbbox(name_pos, name_text, font=f_name, anchor="ms")
-    underline_y = bottom + 5
-    draw.line([(left, underline_y), (right, underline_y)], fill=TEAL, width=3)
+    
+    while current_font_size > 10:
+        try:
+            temp_font = ImageFont.truetype(font_path, current_font_size)
+        except:
+            temp_font = ImageFont.load_default()
+            
+        left, top, right, bottom = draw.textbbox((0, 0), name_text, font=temp_font)
+        text_width = right - left
+        
+        # If the text fits inside 440px (allowing margins), keep it
+        if text_width <= 440:
+            f_name = temp_font
+            break
+        current_font_size -= 2 # Shrink font size by 2px each loop
 
-    # 7. Care Info Section
-    start_y = 310
-    spacing = 62
+    # Other fonts
+    try:
+        f_label = ImageFont.truetype(font_path, 34) 
+        f_val = ImageFont.truetype(font_path, 26)   
+    except:
+        f_label = f_val = ImageFont.load_default()
+
+    # 1. Plant Name (Now fits regardless of length!)
+    draw.text((250, 65), name_text, fill=TEXT_DARK, font=f_name, anchor="ms")
+    draw.line([(35, 85), (465, 85)], fill="black", width=6)
+
+    # 2. Specs Section
+    start_y = 165 
+    spacing = 75  
     specs = [
-        ("Care Level:", plant['care']),
-        ("Light:", plant['light']),
-        ("Temp:", plant['temp']),
-        ("CO2:", plant['co2'])
+        ("Growth:", plant['growth']),
+        ("CO2:", plant['co2']),
+        ("Type:", plant['type']),
+        ("Zone:", plant['place'])
     ]
 
     for i, (label, val) in enumerate(specs):
         curr_y = start_y + (i * spacing)
-        draw.text((65, curr_y), label, fill=TEXT_DARK, font=f_label)
-        draw.text((255, curr_y), val, fill=TEXT_DARK, font=f_val)
+        draw.text((60, curr_y), label, fill=TEXT_DARK, font=f_label)
+        draw.text((245, curr_y + 8), val, fill=TEXT_DARK, font=f_val)
 
-    # 8. QR Code pointing to live GitHub site
+    # 3. QR Code
     qr_url = f"{BASE_URL}/{plant['id']}.html"
     qr = qrcode.QRCode(box_size=5, border=1) 
     qr.add_data(qr_url)
     qr.make(fit=True)
     qr_img = qr.make_image(fill_color="black", back_color="white").convert("RGBA")
-    
     qr_x = (500 - qr_img.width) // 2
-    canvas.paste(qr_img, (qr_x, 540), qr_img) 
+    canvas.paste(qr_img, (qr_x, 465), qr_img) 
 
-    # 9. Teal Bottom Button
-    btn_rect = [40, 715, 460, 775]
-    draw.rounded_rectangle(btn_rect, radius=12, fill=TEAL)
-    draw.text((250, 745), "SCAN FOR INFO", fill=WHITE, font=f_btn, anchor="ms")
+    # 4. Logo
+    try:
+        logo = Image.open(LOGO_FILE).convert("RGBA")
+        logo.thumbnail((340, 150))
+        x_logo = (500 - logo.width) // 2
+        y_logo = 685 
+        canvas.paste(logo, (x_logo, y_logo), logo)
+    except:
+        draw.text((250, 740), "Ease-Aquatics™", fill=TEXT_DARK, font=f_label, anchor="ms")
 
-    # 10. Save
-    canvas.save(f"{LABEL_DIR}/{plant['id']}_pro_silver.png", "PNG")
+    canvas = add_corners(canvas, CORNER_RADIUS)
+    canvas.save(f"{LABEL_DIR}/{plant['id']}_branded.png", "PNG")
 
 def main():
     if not os.path.exists(LABEL_DIR): os.makedirs(LABEL_DIR)
-    print(f"🚀 Generating Underlined Silver Stickers for Ease-Aquatics...")
+    print(f"🚀 Generating High-Impact Branded Stickers with Auto-Scaling...")
     for plant in plant_data:
         create_branded_sticker(plant)
         print(f"✅ Created: {plant['name']}")
