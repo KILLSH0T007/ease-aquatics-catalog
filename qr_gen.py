@@ -6,8 +6,8 @@ from PIL import Image, ImageDraw, ImageFont
 Image.MAX_IMAGE_PIXELS = None 
 
 # --- SETTINGS ---
-# Updated to your new custom domain
-BASE_URL = "https://www.ease-aquatics.co.za"
+# Updated to your verified custom domain
+BASE_URL = "https://ease-aquatics.co.za"
 LOGO_FILE = "dist/img/SimpleLogo.png" 
 LABEL_DIR = "Final_Branded_Stickers"
 
@@ -72,6 +72,7 @@ def create_branded_sticker(plant):
         except:
             temp_font = ImageFont.load_default()
             
+        # Use textbbox to ensure name fits perfectly within sticker width
         left, top, right, bottom = draw.textbbox((0, 0), name_text, font=temp_font)
         text_width = right - left
         
@@ -109,17 +110,23 @@ def create_branded_sticker(plant):
         draw.text((60, curr_y), label, fill=TEXT_DARK, font=f_label)
         draw.text((245, curr_y + 8), val, fill=TEXT_DARK, font=f_val)
 
-    # 3. QR Code - Updated to point to the new domain
-    # Change '.html' to match your catalog structure (e.g., catalog/monte-carlo.html)
-    qr_url = f"{BASE_URL}/{plant['id']}.html"
-    qr = qrcode.QRCode(box_size=5, border=1) 
+    # 3. QR Code - Clean URL configuration
+    # Pointing to extensionless URLs which GitHub Pages resolves automatically
+    qr_url = f"{BASE_URL}/{plant['id']}"
+    qr = qrcode.QRCode(
+        version=1,
+        error_correction=qrcode.constants.ERROR_CORRECT_M, # Improved for better scannability
+        box_size=6, # Slightly larger pixels for easier mobile scanning
+        border=2
+    ) 
     qr.add_data(qr_url)
     qr.make(fit=True)
+    
     qr_img = qr.make_image(fill_color="black", back_color="white").convert("RGBA")
     qr_x = (500 - qr_img.width) // 2
     canvas.paste(qr_img, (qr_x, 465), qr_img) 
 
-    # 4. Logo
+    # 4. Logo section
     try:
         logo = Image.open(LOGO_FILE).convert("RGBA")
         logo.thumbnail((340, 150))
@@ -127,6 +134,7 @@ def create_branded_sticker(plant):
         y_logo = 685 
         canvas.paste(logo, (x_logo, y_logo), logo)
     except:
+        # Fallback text if logo file is missing
         draw.text((250, 740), "Ease-Aquatics™", fill=TEXT_DARK, font=f_label, anchor="ms")
 
     canvas = add_corners(canvas, CORNER_RADIUS)
