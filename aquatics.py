@@ -174,7 +174,7 @@ def generate_site():
     for item in os.listdir(dist_dir):
         item_path = os.path.join(dist_dir, item)
         if item == IMG_SUBDIR:
-            continue  # Keep the pictures!
+            continue  # Protect photos
             
         if os.path.isfile(item_path):
             if item.endswith(".html"):
@@ -182,13 +182,14 @@ def generate_site():
         elif os.path.isdir(item_path):
             shutil.rmtree(item_path)
 
-    # 3. COPY ASSETS
+    # 3. COPY LOGO
     if os.path.exists(LOGO_FILE):
         shutil.copy(LOGO_FILE, os.path.join(dist_dir, LOGO_FILE))
 
     # 4. GENERATE CATALOG (INDEX)
+    # Using Absolute URLs for navigation
     cat_html = f"""{CSS}<body><div class="container">
-        <img src="{LOGO_FILE}" class="logo">
+        <img src="/{LOGO_FILE}" class="logo">
         <input type="text" id="s" class="search-box" placeholder="Search catalog..." onkeyup="filter()">
         <div id="g">
     """
@@ -196,10 +197,11 @@ def generate_site():
         if os.path.exists(p['image']):
             shutil.copy(p['image'], os.path.join(img_dir, p['image']))
         
-        img_src = f"{IMG_SUBDIR}/{p['image']}"
+        # Images use absolute path
+        img_src = f"/{IMG_SUBDIR}/{p['image']}"
         
         cat_html += f"""
-        <a href="{p['id']}/" class="plant-card">
+        <a href="/{p['id']}/" class="plant-card">
             <img src="{img_src}" class="thumb">
             <div class="card-content">
                 <h2>{p['name']}</h2>
@@ -218,18 +220,19 @@ def generate_site():
     with open(os.path.join(dist_dir, "index.html"), "w", encoding="utf-8") as f: 
         f.write(cat_html)
 
-    # 5. GENERATE DETAIL PAGES (CLEAN URLS)
+    # 5. GENERATE DETAIL PAGES
     for p in plants:
         plant_folder = os.path.join(dist_dir, p['id'])
         if not os.path.exists(plant_folder):
             os.makedirs(plant_folder)
 
-        img_src = f"../{IMG_SUBDIR}/{p['image']}"
+        # Detail pages also use absolute paths for assets
+        img_src = f"/{IMG_SUBDIR}/{p['image']}"
         
         specs_html = "".join([f'<div class="spec-item"><span class="spec-label">{k}</span><span class="spec-value">{v}</span></div>' for k,v in p['specs'].items()])
         
         det_html = f"""{CSS}<body><div class="container">
-            <a href="../" class="btn-back">{SVG_ARROW} Back</a>
+            <a href="/" class="btn-back">{SVG_ARROW} Back</a>
             <h1>{p['name']}</h1>
             <img src="{img_src}" class="hero-img">
             <div class="full-desc">{p['full_description']}</div>
@@ -245,7 +248,7 @@ def generate_site():
         with open(os.path.join(plant_folder, "index.html"), "w", encoding="utf-8") as f: 
             f.write(det_html)
 
-    print(f"\n🚀 Site Generated Successfully with Clean URLs!")
+    print(f"\n🚀 Site Generated Successfully with Clean Absolute URLs!")
     print(f"📡 To view on your phone, open Chrome and go to: {get_ip()}:8000\n")
 
 if __name__ == "__main__":
