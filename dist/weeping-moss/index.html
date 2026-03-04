@@ -7,7 +7,8 @@
 <style>
 body { font-family: 'Inter', -apple-system, sans-serif; background: #F2F2F7; color: #1C1C1E; margin: 0; padding: 15px; overflow-x: hidden; }
 .container { max-width: 600px; margin: auto; }
-.logo { max-width: 140px; display: block; margin: 10px auto 25px auto; }
+.logo { max-width: 140px; display: block; margin: 10px auto 25px auto; transition: opacity 0.2s; }
+.logo:hover { opacity: 0.8; }
 .search-box { width: 100%; padding: 16px; border-radius: 12px; border: 1px solid #D1D1D6; background: #FFFFFF; margin-bottom: 20px; outline: none; box-sizing: border-box; font-size: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
 .plant-card { display: flex; align-items: center; gap: 12px; background: #FFFFFF; padding: 12px; border-radius: 14px; margin-bottom: 12px; border: 1px solid #D1D1D6; text-decoration: none; color: inherit; box-shadow: 0 4px 6px rgba(0,0,0,0.02); transition: 0.2s; }
 .thumb { width: 75px; height: 75px; border-radius: 10px; object-fit: cover; background: #eee; flex-shrink: 0; }
@@ -25,6 +26,9 @@ h1 { font-size: 1.5rem; line-height: 1.2; margin: 0 0 10px 0; word-break: break-
 </style>
 </head>
 <body><div class="container">
+            <a href="/">
+                <img src="/img/SimpleLogo.png" class="logo" style="max-width: 100px; margin-bottom: 10px;" alt="Ease-Aquatics Home">
+            </a>
             <a href="/" class="btn-back"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg> Back</a>
             <h1>Vesicularia ferriei 'Weeping' Moss</h1>
             <img src="/img/weeping_moss.jpg" class="hero-img">

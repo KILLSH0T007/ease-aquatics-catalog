@@ -138,7 +138,8 @@ CSS = f"""
 <style>
 body {{ font-family: 'Inter', -apple-system, sans-serif; background: {COLORS['background_silver']}; color: {COLORS['text_main']}; margin: 0; padding: 15px; overflow-x: hidden; }}
 .container {{ max-width: 600px; margin: auto; }}
-.logo {{ max-width: 140px; display: block; margin: 10px auto 25px auto; }}
+.logo {{ max-width: 140px; display: block; margin: 10px auto 25px auto; transition: opacity 0.2s; }}
+.logo:hover {{ opacity: 0.8; }}
 .search-box {{ width: 100%; padding: 16px; border-radius: 12px; border: 1px solid {COLORS['border']}; background: {COLORS['card_white']}; margin-bottom: 20px; outline: none; box-sizing: border-box; font-size: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }}
 .plant-card {{ display: flex; align-items: center; gap: 12px; background: {COLORS['card_white']}; padding: 12px; border-radius: 14px; margin-bottom: 12px; border: 1px solid {COLORS['border']}; text-decoration: none; color: inherit; box-shadow: 0 4px 6px rgba(0,0,0,0.02); transition: 0.2s; }}
 .thumb {{ width: 75px; height: 75px; border-radius: 10px; object-fit: cover; background: #eee; flex-shrink: 0; }}
@@ -169,12 +170,12 @@ def generate_site():
     if not os.path.exists(img_dir): 
         os.makedirs(img_dir)
     
-    # 2. SMART CLEANUP: Delete old HTML files and plant folders, but PROTECT the 'img' folder
+    # 2. SMART CLEANUP: Delete old HTML and plant folders, but PROTECT 'img' folder
     print("🧹 Cleaning old files (protecting images)...")
     for item in os.listdir(dist_dir):
         item_path = os.path.join(dist_dir, item)
         if item == IMG_SUBDIR:
-            continue  # Protect photos
+            continue  
             
         if os.path.isfile(item_path):
             if item.endswith(".html"):
@@ -187,9 +188,10 @@ def generate_site():
         shutil.copy(LOGO_FILE, os.path.join(dist_dir, LOGO_FILE))
 
     # 4. GENERATE CATALOG (INDEX)
-    # Using Absolute URLs for navigation
     cat_html = f"""{CSS}<body><div class="container">
-        <img src="/{LOGO_FILE}" class="logo">
+        <a href="/">
+            <img src="/{LOGO_FILE}" class="logo" alt="Ease-Aquatics Home">
+        </a>
         <input type="text" id="s" class="search-box" placeholder="Search catalog..." onkeyup="filter()">
         <div id="g">
     """
@@ -197,7 +199,6 @@ def generate_site():
         if os.path.exists(p['image']):
             shutil.copy(p['image'], os.path.join(img_dir, p['image']))
         
-        # Images use absolute path
         img_src = f"/{IMG_SUBDIR}/{p['image']}"
         
         cat_html += f"""
@@ -220,18 +221,19 @@ def generate_site():
     with open(os.path.join(dist_dir, "index.html"), "w", encoding="utf-8") as f: 
         f.write(cat_html)
 
-    # 5. GENERATE DETAIL PAGES
+    # 5. GENERATE DETAIL PAGES (CLEAN FOLDERS)
     for p in plants:
         plant_folder = os.path.join(dist_dir, p['id'])
         if not os.path.exists(plant_folder):
             os.makedirs(plant_folder)
 
-        # Detail pages also use absolute paths for assets
         img_src = f"/{IMG_SUBDIR}/{p['image']}"
-        
         specs_html = "".join([f'<div class="spec-item"><span class="spec-label">{k}</span><span class="spec-value">{v}</span></div>' for k,v in p['specs'].items()])
         
         det_html = f"""{CSS}<body><div class="container">
+            <a href="/">
+                <img src="/{LOGO_FILE}" class="logo" style="max-width: 100px; margin-bottom: 10px;" alt="Ease-Aquatics Home">
+            </a>
             <a href="/" class="btn-back">{SVG_ARROW} Back</a>
             <h1>{p['name']}</h1>
             <img src="{img_src}" class="hero-img">
@@ -248,7 +250,7 @@ def generate_site():
         with open(os.path.join(plant_folder, "index.html"), "w", encoding="utf-8") as f: 
             f.write(det_html)
 
-    print(f"\n🚀 Site Generated Successfully with Clean Absolute URLs!")
+    print(f"\n🚀 Site Generated Successfully with Clickable Logo and Clean URLs!")
     print(f"📡 To view on your phone, open Chrome and go to: {get_ip()}:8000\n")
 
 if __name__ == "__main__":
