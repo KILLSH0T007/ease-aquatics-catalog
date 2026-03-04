@@ -6,12 +6,10 @@ from PIL import Image, ImageDraw, ImageFont
 Image.MAX_IMAGE_PIXELS = None 
 
 # --- SETTINGS ---
-GITHUB_USERNAME = "KILLSH0T007" 
-REPO_NAME = "ease-aquatics-catalog"
-BASE_URL = f"https://{GITHUB_USERNAME}.github.io/{REPO_NAME}/dist"
+# Updated to your new custom domain
+BASE_URL = "https://www.ease-aquatics.co.za"
 LOGO_FILE = "dist/img/SimpleLogo.png" 
 LABEL_DIR = "Final_Branded_Stickers"
-
 
 # --- BRAND PALETTE ---
 GRADIENT_TOP = (175, 225, 225) 
@@ -60,12 +58,14 @@ def create_branded_sticker(plant):
     canvas = canvas.convert("RGBA")
     draw = ImageDraw.Draw(canvas)
     
-    font_path = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+    # Updated font path for Windows/WSL environment
+    font_path = "C:/Windows/Fonts/arialbd.ttf" if os.name == 'nt' else "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
     
     # --- DYNAMIC FONT SCALING FOR NAME ---
-    current_font_size = 52 # Starting size
+    current_font_size = 52 
     name_text = plant['name']
     
+    f_name = None
     while current_font_size > 10:
         try:
             temp_font = ImageFont.truetype(font_path, current_font_size)
@@ -75,11 +75,13 @@ def create_branded_sticker(plant):
         left, top, right, bottom = draw.textbbox((0, 0), name_text, font=temp_font)
         text_width = right - left
         
-        # If the text fits inside 440px (allowing margins), keep it
         if text_width <= 440:
             f_name = temp_font
             break
-        current_font_size -= 2 # Shrink font size by 2px each loop
+        current_font_size -= 2
+
+    # Fallback if loop fails
+    if not f_name: f_name = ImageFont.load_default()
 
     # Other fonts
     try:
@@ -88,7 +90,7 @@ def create_branded_sticker(plant):
     except:
         f_label = f_val = ImageFont.load_default()
 
-    # 1. Plant Name (Now fits regardless of length!)
+    # 1. Plant Name
     draw.text((250, 65), name_text, fill=TEXT_DARK, font=f_name, anchor="ms")
     draw.line([(35, 85), (465, 85)], fill="black", width=6)
 
@@ -107,7 +109,8 @@ def create_branded_sticker(plant):
         draw.text((60, curr_y), label, fill=TEXT_DARK, font=f_label)
         draw.text((245, curr_y + 8), val, fill=TEXT_DARK, font=f_val)
 
-    # 3. QR Code
+    # 3. QR Code - Updated to point to the new domain
+    # Change '.html' to match your catalog structure (e.g., catalog/monte-carlo.html)
     qr_url = f"{BASE_URL}/{plant['id']}.html"
     qr = qrcode.QRCode(box_size=5, border=1) 
     qr.add_data(qr_url)
@@ -131,7 +134,7 @@ def create_branded_sticker(plant):
 
 def main():
     if not os.path.exists(LABEL_DIR): os.makedirs(LABEL_DIR)
-    print(f"🚀 Generating High-Impact Branded Stickers with Auto-Scaling...")
+    print(f"🚀 Generating Stickers for: {BASE_URL}")
     for plant in plant_data:
         create_branded_sticker(plant)
         print(f"✅ Created: {plant['name']}")
