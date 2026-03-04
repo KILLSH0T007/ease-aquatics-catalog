@@ -163,14 +163,30 @@ def generate_site():
     dist_dir = "dist"
     img_dir = os.path.join(dist_dir, IMG_SUBDIR)
     
+    # 1. INITIALIZE DIRECTORIES
+    if not os.path.exists(dist_dir): 
+        os.makedirs(dist_dir)
     if not os.path.exists(img_dir): 
         os.makedirs(img_dir)
     
-    # Copy logo
+    # 2. SMART CLEANUP: Delete old HTML files and plant folders, but PROTECT the 'img' folder
+    print("🧹 Cleaning old files (protecting images)...")
+    for item in os.listdir(dist_dir):
+        item_path = os.path.join(dist_dir, item)
+        if item == IMG_SUBDIR:
+            continue  # Keep the pictures!
+            
+        if os.path.isfile(item_path):
+            if item.endswith(".html"):
+                os.remove(item_path)
+        elif os.path.isdir(item_path):
+            shutil.rmtree(item_path)
+
+    # 3. COPY ASSETS
     if os.path.exists(LOGO_FILE):
         shutil.copy(LOGO_FILE, os.path.join(dist_dir, LOGO_FILE))
 
-    # 1. Generate Catalog (Index)
+    # 4. GENERATE CATALOG (INDEX)
     cat_html = f"""{CSS}<body><div class="container">
         <img src="{LOGO_FILE}" class="logo">
         <input type="text" id="s" class="search-box" placeholder="Search catalog..." onkeyup="filter()">
@@ -182,7 +198,6 @@ def generate_site():
         
         img_src = f"{IMG_SUBDIR}/{p['image']}"
         
-        # LINK CHANGE: Use folder name instead of .html
         cat_html += f"""
         <a href="{p['id']}/" class="plant-card">
             <img src="{img_src}" class="thumb">
@@ -200,18 +215,16 @@ def generate_site():
         }}
     }}</script></body></html>"""
     
-    with open(os.path.join(dist_dir, "index.html"), "w", encoding="utf-8") as f: f.write(cat_html)
+    with open(os.path.join(dist_dir, "index.html"), "w", encoding="utf-8") as f: 
+        f.write(cat_html)
 
-    # 2. Generate Detail Pages as folders/index.html
+    # 5. GENERATE DETAIL PAGES (CLEAN URLS)
     for p in plants:
-        # Create a folder for each plant
         plant_folder = os.path.join(dist_dir, p['id'])
         if not os.path.exists(plant_folder):
             os.makedirs(plant_folder)
 
-        # Image src needs to go back one level to reach /img/
         img_src = f"../{IMG_SUBDIR}/{p['image']}"
-        logo_path = f"../{LOGO_FILE}"
         
         specs_html = "".join([f'<div class="spec-item"><span class="spec-label">{k}</span><span class="spec-value">{v}</span></div>' for k,v in p['specs'].items()])
         
@@ -229,8 +242,8 @@ def generate_site():
             <div class="footer">EASE-AQUATICS&trade; | {p['name']}</div>
         </div></body></html>
         """
-        # Save as index.html INSIDE the plant folder
-        with open(os.path.join(plant_folder, "index.html"), "w", encoding="utf-8") as f: f.write(det_html)
+        with open(os.path.join(plant_folder, "index.html"), "w", encoding="utf-8") as f: 
+            f.write(det_html)
 
     print(f"\n🚀 Site Generated Successfully with Clean URLs!")
     print(f"📡 To view on your phone, open Chrome and go to: {get_ip()}:8000\n")
