@@ -13,7 +13,7 @@ COLORS = {
 }
 
 LOGO_FILE = "img/SimpleLogo.png"
-IMG_SUBDIR = "img" # Subdirectory inside dist
+IMG_SUBDIR = "img" 
 
 def get_ip():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -163,10 +163,10 @@ def generate_site():
     dist_dir = "dist"
     img_dir = os.path.join(dist_dir, IMG_SUBDIR)
     
-    # Create dist and dist/img directories if they don't exist
     if not os.path.exists(img_dir): 
         os.makedirs(img_dir)
     
+    # Copy logo
     if os.path.exists(LOGO_FILE):
         shutil.copy(LOGO_FILE, os.path.join(dist_dir, LOGO_FILE))
 
@@ -177,15 +177,14 @@ def generate_site():
         <div id="g">
     """
     for p in plants:
-        # Copy image to dist/img/
         if os.path.exists(p['image']):
             shutil.copy(p['image'], os.path.join(img_dir, p['image']))
         
-        # Link the source in HTML to img/filename
         img_src = f"{IMG_SUBDIR}/{p['image']}"
         
+        # LINK CHANGE: Use folder name instead of .html
         cat_html += f"""
-        <a href="{p['id']}.html" class="plant-card">
+        <a href="{p['id']}/" class="plant-card">
             <img src="{img_src}" class="thumb">
             <div class="card-content">
                 <h2>{p['name']}</h2>
@@ -203,12 +202,21 @@ def generate_site():
     
     with open(os.path.join(dist_dir, "index.html"), "w", encoding="utf-8") as f: f.write(cat_html)
 
-    # 2. Generate Detail Pages
+    # 2. Generate Detail Pages as folders/index.html
     for p in plants:
-        img_src = f"{IMG_SUBDIR}/{p['image']}"
+        # Create a folder for each plant
+        plant_folder = os.path.join(dist_dir, p['id'])
+        if not os.path.exists(plant_folder):
+            os.makedirs(plant_folder)
+
+        # Image src needs to go back one level to reach /img/
+        img_src = f"../{IMG_SUBDIR}/{p['image']}"
+        logo_path = f"../{LOGO_FILE}"
+        
         specs_html = "".join([f'<div class="spec-item"><span class="spec-label">{k}</span><span class="spec-value">{v}</span></div>' for k,v in p['specs'].items()])
+        
         det_html = f"""{CSS}<body><div class="container">
-            <a href="index.html" class="btn-back">{SVG_ARROW} Back</a>
+            <a href="../" class="btn-back">{SVG_ARROW} Back</a>
             <h1>{p['name']}</h1>
             <img src="{img_src}" class="hero-img">
             <div class="full-desc">{p['full_description']}</div>
@@ -221,9 +229,10 @@ def generate_site():
             <div class="footer">EASE-AQUATICS&trade; | {p['name']}</div>
         </div></body></html>
         """
-        with open(os.path.join(dist_dir, f"{p['id']}.html"), "w", encoding="utf-8") as f: f.write(det_html)
+        # Save as index.html INSIDE the plant folder
+        with open(os.path.join(plant_folder, "index.html"), "w", encoding="utf-8") as f: f.write(det_html)
 
-    print(f"\n🚀 Site Generated Successfully!")
+    print(f"\n🚀 Site Generated Successfully with Clean URLs!")
     print(f"📡 To view on your phone, open Chrome and go to: {get_ip()}:8000\n")
 
 if __name__ == "__main__":
