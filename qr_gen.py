@@ -6,7 +6,7 @@ from PIL import Image, ImageDraw, ImageFont
 Image.MAX_IMAGE_PIXELS = None 
 
 # --- SETTINGS ---
-# Updated to your verified custom domain
+# Use the clean domain without the www prefix for a shorter, cleaner QR code
 BASE_URL = "https://ease-aquatics.co.za"
 LOGO_FILE = "dist/img/SimpleLogo.png" 
 LABEL_DIR = "Final_Branded_Stickers"
@@ -58,10 +58,9 @@ def create_branded_sticker(plant):
     canvas = canvas.convert("RGBA")
     draw = ImageDraw.Draw(canvas)
     
-    # Updated font path for Windows/WSL environment
+    # Path logic for Windows/WSL
     font_path = "C:/Windows/Fonts/arialbd.ttf" if os.name == 'nt' else "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
     
-    # --- DYNAMIC FONT SCALING FOR NAME ---
     current_font_size = 52 
     name_text = plant['name']
     
@@ -72,7 +71,6 @@ def create_branded_sticker(plant):
         except:
             temp_font = ImageFont.load_default()
             
-        # Use textbbox to ensure name fits perfectly within sticker width
         left, top, right, bottom = draw.textbbox((0, 0), name_text, font=temp_font)
         text_width = right - left
         
@@ -81,21 +79,17 @@ def create_branded_sticker(plant):
             break
         current_font_size -= 2
 
-    # Fallback if loop fails
     if not f_name: f_name = ImageFont.load_default()
 
-    # Other fonts
     try:
         f_label = ImageFont.truetype(font_path, 34) 
         f_val = ImageFont.truetype(font_path, 26)   
     except:
         f_label = f_val = ImageFont.load_default()
 
-    # 1. Plant Name
     draw.text((250, 65), name_text, fill=TEXT_DARK, font=f_name, anchor="ms")
     draw.line([(35, 85), (465, 85)], fill="black", width=6)
 
-    # 2. Specs Section
     start_y = 165 
     spacing = 75  
     specs = [
@@ -110,13 +104,15 @@ def create_branded_sticker(plant):
         draw.text((60, curr_y), label, fill=TEXT_DARK, font=f_label)
         draw.text((245, curr_y + 8), val, fill=TEXT_DARK, font=f_val)
 
-    # 3. QR Code - Clean URL configuration
-    # Pointing to extensionless URLs which GitHub Pages resolves automatically
-    qr_url = f"{BASE_URL}/{plant['id']}"
+    # --- CRITICAL FIX: URL STRUCTURE ---
+    # Appending a trailing slash / ensures browsers treat this as a directory.
+    # This matches your folder-based generation (e.g., dist/monte-carlo/index.html)
+    qr_url = f"{BASE_URL}/{plant['id']}/"
+    
     qr = qrcode.QRCode(
         version=1,
-        error_correction=qrcode.constants.ERROR_CORRECT_M, # Improved for better scannability
-        box_size=6, # Slightly larger pixels for easier mobile scanning
+        error_correction=qrcode.constants.ERROR_CORRECT_M,
+        box_size=6, 
         border=2
     ) 
     qr.add_data(qr_url)
@@ -126,7 +122,6 @@ def create_branded_sticker(plant):
     qr_x = (500 - qr_img.width) // 2
     canvas.paste(qr_img, (qr_x, 465), qr_img) 
 
-    # 4. Logo section
     try:
         logo = Image.open(LOGO_FILE).convert("RGBA")
         logo.thumbnail((340, 150))
@@ -134,7 +129,6 @@ def create_branded_sticker(plant):
         y_logo = 685 
         canvas.paste(logo, (x_logo, y_logo), logo)
     except:
-        # Fallback text if logo file is missing
         draw.text((250, 740), "Ease-Aquatics™", fill=TEXT_DARK, font=f_label, anchor="ms")
 
     canvas = add_corners(canvas, CORNER_RADIUS)
@@ -142,10 +136,10 @@ def create_branded_sticker(plant):
 
 def main():
     if not os.path.exists(LABEL_DIR): os.makedirs(LABEL_DIR)
-    print(f"🚀 Generating Stickers for: {BASE_URL}")
+    print(f"🚀 Generating Clean Stickers for: {BASE_URL}")
     for plant in plant_data:
         create_branded_sticker(plant)
-        print(f"✅ Created: {plant['name']}")
+        print(f"✅ Created QR for: {plant['name']} -> {BASE_URL}/{plant['id']}/")
 
 if __name__ == "__main__":
     main()
