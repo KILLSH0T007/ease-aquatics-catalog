@@ -1,44 +1,104 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<style>
-body { font-family: 'Inter', -apple-system, sans-serif; background: #F2F2F7; color: #1C1C1E; margin: 0; padding: 15px; overflow-x: hidden; }
-.container { max-width: 600px; margin: auto; }
-.logo { max-width: 140px; display: block; margin: 10px auto 25px auto; transition: opacity 0.2s; }
-.logo:hover { opacity: 0.8; }
-.search-box { width: 100%; padding: 16px; border-radius: 12px; border: 1px solid #D1D1D6; background: #FFFFFF; margin-bottom: 20px; outline: none; box-sizing: border-box; font-size: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-.plant-card { display: flex; align-items: center; gap: 12px; background: #FFFFFF; padding: 12px; border-radius: 14px; margin-bottom: 12px; border: 1px solid #D1D1D6; text-decoration: none; color: inherit; box-shadow: 0 4px 6px rgba(0,0,0,0.02); transition: 0.2s; }
-.thumb { width: 75px; height: 75px; border-radius: 10px; object-fit: cover; background: #eee; flex-shrink: 0; }
-.card-content h2 { margin: 0; font-size: 1rem; line-height: 1.2; word-break: break-word; }
-.card-content p { margin: 3px 0 0 0; color: #636366; font-size: 0.8rem; line-height: 1.3; }
-.btn-back { display: inline-flex; align-items: center; gap: 8px; color: #4A9E9E; text-decoration: none; font-weight: 600; font-size: 0.9rem; padding: 10px 16px; background: #FFFFFF; border: 1px solid #D1D1D6; border-radius: 8px; margin-bottom: 15px; }
-.hero-img { width: 100%; height: auto; border-radius: 15px; border: 1px solid #D1D1D6; margin-bottom: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); }
-h1 { font-size: 1.5rem; line-height: 1.2; margin: 0 0 10px 0; word-break: break-word; }
-.full-desc { line-height: 1.6; font-size: 0.95rem; color: #3A3A3C; margin-bottom: 25px; }
-.spec-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-.spec-item { background: #FFFFFF; padding: 12px; border-radius: 12px; border: 1px solid #D1D1D6; }
-.spec-label { color: #636366; font-size: 0.65rem; text-transform: uppercase; font-weight: 700; display: block; margin-bottom: 2px; }
-.spec-value { color: #4A9E9E; font-weight: 600; font-size: 0.85rem; }
-.footer { text-align: center; color: #636366; margin-top: 50px; font-size: 0.75rem; padding-bottom: 30px; }
-</style>
-</head>
-<body><div class="container">
-            <a href="/">
-                <img src="/img/SimpleLogo.png" class="logo" style="max-width: 100px; margin-bottom: 10px;" alt="Ease-Aquatics Home">
-            </a>
-            <a href="/" class="btn-back"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg> Back</a>
-            <h1>Rotala rotundifolia 'Green'</h1>
-            <img src="/img/rotala_green.jpg" class="hero-img">
-            <div class="full-desc">Stays vibrant green even under high light. Forms thick bushes when pruned regularly.</div>
-            <div class="spec-grid">
-                <div class="spec-item"><span class="spec-label">Difficulty</span><span class="spec-value">Easy</span></div>
-                <div class="spec-item"><span class="spec-label">Lighting</span><span class="spec-value">Medium</span></div>
-                <div class="spec-item"><span class="spec-label">CO2</span><span class="spec-value">Recommended</span></div>
-                <div class="spec-item"><span class="spec-label">Growth</span><span class="spec-value">Fast</span></div><div class="spec-item"><span class="spec-label">pH</span><span class="spec-value">5.0-7.0</span></div><div class="spec-item"><span class="spec-label">Position</span><span class="spec-value">Background</span></div>
-            </div>
-            <div class="footer">EASE-AQUATICS&trade; | Rotala rotundifolia 'Green'</div>
-        </div></body></html>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <style>
+        body { font-family: 'Inter', -apple-system, sans-serif; background: #F2F2F7; color: #1C1C1E; margin: 0; padding: 15px; overflow-x: hidden; line-height: 1.5; }
+        .container { max-width: 600px; margin: auto; }
+        .logo { max-width: 100px; display: block; margin: 10px auto 25px auto; transition: opacity 0.2s; }
+        .btn-back { display: inline-flex; align-items: center; gap: 8px; color: #4A9E9E; text-decoration: none; font-weight: 600; font-size: 0.9rem; padding: 10px 16px; background: #FFFFFF; border: 1px solid #D1D1D6; border-radius: 8px; margin-bottom: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .hero-img { width: 100%; height: auto; border-radius: 15px; border: 1px solid #D1D1D6; margin-bottom: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); }
+        h1 { font-size: 1.6rem; line-height: 1.2; margin: 0 0 5px 0; color: #1C1C1E; }
+        .scientific-name { font-style: italic; color: #636366; font-size: 0.9rem; margin-bottom: 15px; display: block; }
         
+        .section-card { background: #FFFFFF; padding: 20px; border-radius: 16px; border: 1px solid #D1D1D6; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+        h3 { margin-top: 0; font-size: 1.1rem; color: #4A9E9E; border-bottom: 1px solid #F2F2F7; padding-bottom: 8px; margin-bottom: 12px; }
+        
+        .spec-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 15px; }
+        .spec-item { background: #FFFFFF; padding: 12px; border-radius: 12px; border: 1px solid #D1D1D6; display: flex; flex-direction: column; }
+        .spec-label { color: #8E8E93; font-size: 0.65rem; text-transform: uppercase; font-weight: 700; margin-bottom: 4px; }
+        .spec-value { color: #1C1C1E; font-weight: 600; font-size: 0.9rem; }
+
+        .care-list { padding-left: 20px; margin: 0; }
+        .care-list li { margin-bottom: 10px; font-size: 0.95rem; color: #3A3A3C; }
+        .care-list b { color: #1C1C1E; }
+
+        .footer { text-align: center; color: #8E8E93; margin-top: 40px; font-size: 0.75rem; padding-bottom: 30px; letter-spacing: 0.5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/">
+            <img src="/img/SimpleLogo.png" class="logo" alt="Ease-Aquatics">
+        </a>
+        
+        <a href="/" class="btn-back">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg> Back
+        </a>
+
+        <h1>Rotala 'Green'</h1>
+        <span class="scientific-name">Rotala rotundifolia 'Green'</span>
+        
+        <img src="/img/rotala_green.jpg" class="hero-img" alt="Rotala Green">
+
+        <div class="spec-grid">
+            <div class="spec-item"><span class="spec-label">Difficulty</span><span class="spec-value">Easy</span></div>
+            <div class="spec-item"><span class="spec-label">Growth Rate</span><span class="spec-value">Fast</span></div>
+            <div class="spec-item"><span class="spec-label">Light Needs</span><span class="spec-value">Medium - High</span></div>
+            <div class="spec-item"><span class="spec-label">CO2</span><span class="spec-value">Recommended</span></div>
+            <div class="spec-item"><span class="spec-label">pH</span><span class="spec-value">5.0 - 7.0</span></div>
+            <div class="spec-item"><span class="spec-label">Position</span><span class="spec-value">Background</span></div>
+        </div>
+
+        <div class="section-card" style="background: #E8F4E8; border-color: #4A9E4A;">
+            <h3 style="color: #2C5E2C;">✨ Why Ease-Aquatics Rotala?</h3>
+            <p style="font-size: 0.95rem; color: #2C5E2C; margin: 0;">
+                Our Rotala Green is <b>locally grown</b> to stay vibrant and bushy. Unlike the standard rotundifolia, the 'Green' variety stays <b>pure lime green</b> even under high-intensity light, never turning orange or red. It is Pretoria-hardened for a seamless transition to your scape.
+            </p>
+        </div>
+
+        <div class="section-card">
+            <h3>Advanced Technical Info</h3>
+            <ul class="care-list">
+                <li><b>Growth Habit:</b> Unlike other Rotalas, 'Green' tends to grow <b>horizontally</b> or weeping when first planted under high light before pushing upwards.</li>
+                <li><b>Color Stability:</b> If your Rotala is turning red, it isn't the 'Green' variety. This specific strain is prized for maintaining its fresh spring-green look.</li>
+                <li><b>Nutrient Demand:</b> A fast grower that loves nitrates. If leaves look pale or small, increase your liquid fertilization.</li>
+                <li><b>Shrimp Safe:</b> Provides excellent cover for shrimp colonies once it forms a dense thicket.</li>
+            </ul>
+        </div>
+
+        <div class="section-card">
+            <h3>Care & Maintenance</h3>
+            <ul class="care-list">
+                <li><b>Pruning:</b> ⚠️ <b>Critical:</b> To get the "bush" look, you must prune frequently. Cut the stems low; the plant will then produce multiple side-shoots from the cut point.</li>
+                <li><b>Light:</b> Adapts to medium light, but high light creates much denser, more attractive leaf nodes.</li>
+                <li><b>CO2:</b> Not strictly required, but CO2 injection will significantly increase growth speed and leaf size.</li>
+            </ul>
+        </div>
+
+        <div class="section-card">
+            <h3>How to Propagate</h3>
+            <ul class="care-list">
+                <li><b>Stem Cuttings:</b> Simply snip a healthy stem (at least 10cm long) and remove the lower leaves.</li>
+                <li><b>Replanting:</b> Push the bare stem into the substrate. It will develop a new root system within days.</li>
+                <li><b>Density:</b> Plant stems about 1-2cm apart to allow light to reach the lower portions of the plant as it matures.</li>
+            </ul>
+        </div>
+
+        <div class="section-card" style="border-left: 5px solid #4A9E4A;">
+            <h3 style="border:none; margin-bottom: 5px;">✅ Is this for you?</h3>
+            <ul class="care-list" style="list-style-type: '✔ '; padding-left: 25px;">
+                <li>You want a vibrant, lime-green background bush.</li>
+                <li>You enjoy regular maintenance and scaping/trimming.</li>
+                <li>You need a fast-growing plant to help out-compete algae.</li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            &copy; 2026 EASE-AQUATICS&trade;<br>
+            PRETORIA, SOUTH AFRICA
+        </div>
+    </div>
+</body>
+</html>
