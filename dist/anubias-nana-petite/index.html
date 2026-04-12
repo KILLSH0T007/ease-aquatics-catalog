@@ -1,44 +1,104 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<style>
-body { font-family: 'Inter', -apple-system, sans-serif; background: #F2F2F7; color: #1C1C1E; margin: 0; padding: 15px; overflow-x: hidden; }
-.container { max-width: 600px; margin: auto; }
-.logo { max-width: 140px; display: block; margin: 10px auto 25px auto; transition: opacity 0.2s; }
-.logo:hover { opacity: 0.8; }
-.search-box { width: 100%; padding: 16px; border-radius: 12px; border: 1px solid #D1D1D6; background: #FFFFFF; margin-bottom: 20px; outline: none; box-sizing: border-box; font-size: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-.plant-card { display: flex; align-items: center; gap: 12px; background: #FFFFFF; padding: 12px; border-radius: 14px; margin-bottom: 12px; border: 1px solid #D1D1D6; text-decoration: none; color: inherit; box-shadow: 0 4px 6px rgba(0,0,0,0.02); transition: 0.2s; }
-.thumb { width: 75px; height: 75px; border-radius: 10px; object-fit: cover; background: #eee; flex-shrink: 0; }
-.card-content h2 { margin: 0; font-size: 1rem; line-height: 1.2; word-break: break-word; }
-.card-content p { margin: 3px 0 0 0; color: #636366; font-size: 0.8rem; line-height: 1.3; }
-.btn-back { display: inline-flex; align-items: center; gap: 8px; color: #4A9E9E; text-decoration: none; font-weight: 600; font-size: 0.9rem; padding: 10px 16px; background: #FFFFFF; border: 1px solid #D1D1D6; border-radius: 8px; margin-bottom: 15px; }
-.hero-img { width: 100%; height: auto; border-radius: 15px; border: 1px solid #D1D1D6; margin-bottom: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); }
-h1 { font-size: 1.5rem; line-height: 1.2; margin: 0 0 10px 0; word-break: break-word; }
-.full-desc { line-height: 1.6; font-size: 0.95rem; color: #3A3A3C; margin-bottom: 25px; }
-.spec-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-.spec-item { background: #FFFFFF; padding: 12px; border-radius: 12px; border: 1px solid #D1D1D6; }
-.spec-label { color: #636366; font-size: 0.65rem; text-transform: uppercase; font-weight: 700; display: block; margin-bottom: 2px; }
-.spec-value { color: #4A9E9E; font-weight: 600; font-size: 0.85rem; }
-.footer { text-align: center; color: #636366; margin-top: 50px; font-size: 0.75rem; padding-bottom: 30px; }
-</style>
-</head>
-<body><div class="container">
-            <a href="/">
-                <img src="/img/SimpleLogo.png" class="logo" style="max-width: 100px; margin-bottom: 10px;" alt="Ease-Aquatics Home">
-            </a>
-            <a href="/" class="btn-back"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg> Back</a>
-            <h1>Anubias barteri var. Nana Petite</h1>
-            <img src="/img/anubias_petite.jpg" class="hero-img">
-            <div class="full-desc">Extremely hardy. Should be attached to wood or rock rather than buried in substrate.</div>
-            <div class="spec-grid">
-                <div class="spec-item"><span class="spec-label">Difficulty</span><span class="spec-value">Very Easy</span></div>
-                <div class="spec-item"><span class="spec-label">Lighting</span><span class="spec-value">Low</span></div>
-                <div class="spec-item"><span class="spec-label">CO2</span><span class="spec-value">Optional</span></div>
-                <div class="spec-item"><span class="spec-label">Growth</span><span class="spec-value">Very Slow</span></div><div class="spec-item"><span class="spec-label">pH</span><span class="spec-value">6.0-7.5</span></div><div class="spec-item"><span class="spec-label">Position</span><span class="spec-value">Hardscape</span></div>
-            </div>
-            <div class="footer">EASE-AQUATICS&trade; | Anubias barteri var. Nana Petite</div>
-        </div></body></html>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <style>
+        body { font-family: 'Inter', -apple-system, sans-serif; background: #F2F2F7; color: #1C1C1E; margin: 0; padding: 15px; overflow-x: hidden; line-height: 1.5; }
+        .container { max-width: 600px; margin: auto; }
+        .logo { max-width: 100px; display: block; margin: 10px auto 25px auto; transition: opacity 0.2s; }
+        .btn-back { display: inline-flex; align-items: center; gap: 8px; color: #4A9E9E; text-decoration: none; font-weight: 600; font-size: 0.9rem; padding: 10px 16px; background: #FFFFFF; border: 1px solid #D1D1D6; border-radius: 8px; margin-bottom: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .hero-img { width: 100%; height: auto; border-radius: 15px; border: 1px solid #D1D1D6; margin-bottom: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); }
+        h1 { font-size: 1.6rem; line-height: 1.2; margin: 0 0 5px 0; color: #1C1C1E; }
+        .scientific-name { font-style: italic; color: #636366; font-size: 0.9rem; margin-bottom: 15px; display: block; }
         
+        .section-card { background: #FFFFFF; padding: 20px; border-radius: 16px; border: 1px solid #D1D1D6; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+        h3 { margin-top: 0; font-size: 1.1rem; color: #4A9E9E; border-bottom: 1px solid #F2F2F7; padding-bottom: 8px; margin-bottom: 12px; }
+        
+        .spec-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 15px; }
+        .spec-item { background: #FFFFFF; padding: 12px; border-radius: 12px; border: 1px solid #D1D1D6; display: flex; flex-direction: column; }
+        .spec-label { color: #8E8E93; font-size: 0.65rem; text-transform: uppercase; font-weight: 700; margin-bottom: 4px; }
+        .spec-value { color: #1C1C1E; font-weight: 600; font-size: 0.9rem; }
+
+        .care-list { padding-left: 20px; margin: 0; }
+        .care-list li { margin-bottom: 10px; font-size: 0.95rem; color: #3A3A3C; }
+        .care-list b { color: #1C1C1E; }
+
+        .footer { text-align: center; color: #8E8E93; margin-top: 40px; font-size: 0.75rem; padding-bottom: 30px; letter-spacing: 0.5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/">
+            <img src="/img/SimpleLogo.png" class="logo" alt="Ease-Aquatics">
+        </a>
+        
+        <a href="/" class="btn-back">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg> Back
+        </a>
+
+        <h1>Anubias Nana Petite</h1>
+        <span class="scientific-name">Anubias barteri var. nana 'Petite'</span>
+        
+        <img src="/img/anubias_petite.jpg" class="hero-img" alt="Anubias Nana Petite">
+
+        <div class="spec-grid">
+            <div class="spec-item"><span class="spec-label">Difficulty</span><span class="spec-value">Beginner</span></div>
+            <div class="spec-item"><span class="spec-label">Growth Rate</span><span class="spec-value">Very Slow</span></div>
+            <div class="spec-item"><span class="spec-label">Light Needs</span><span class="spec-value">Low - Medium</span></div>
+            <div class="spec-item"><span class="spec-label">CO2</span><span class="spec-value">Not Required</span></div>
+            <div class="spec-item"><span class="spec-label">pH</span><span class="spec-value">6.0 - 7.5</span></div>
+            <div class="spec-item"><span class="spec-label">Position</span><span class="spec-value">Hardscape</span></div>
+        </div>
+
+        <div class="section-card" style="background: #E8F4F4; border-color: #4A9E9E;">
+            <h3 style="color: #2C5E5E;">✨ Why Ease-Aquatics Anubias?</h3>
+            <p style="font-size: 0.95rem; color: #2C5E5E; margin: 0;">
+                Our Petite Anubias is <b>fully acclimated</b> and algae-free. Because it is grown in local Pretoria conditions, it is incredibly resilient to the typical "Anubias Rot" seen in fresh imports. It is the perfect "set and forget" plant for busy scapers.
+            </p>
+        </div>
+
+        <div class="section-card">
+            <h3>Advanced Technical Info</h3>
+            <ul class="care-list">
+                <li><b>Rhizome Management:</b> ⚠️ <b>Critical:</b> Do not bury the horizontal thick stem (rhizome) in soil. It will rot. Glue or tie it to rocks/wood instead.</li>
+                <li><b>Algae Protection:</b> Because it grows slowly, it can catch spot algae under high light. Place in shaded areas for a pristine look.</li>
+                <li><b>Fish Compatibility:</b> The leaves are thick and "leathery," making it one of the few plants <b>Goldfish and Cichlid safe</b>.</li>
+                <li><b>The "Petite" Advantage:</b> It stays tiny. One of the best plants for creating "scale" in nano tanks or detailing large scapes.</li>
+            </ul>
+        </div>
+
+        <div class="section-card">
+            <h3>Care & Maintenance</h3>
+            <ul class="care-list">
+                <li><b>Feeding:</b> As an epiphyte, it takes nutrients from the water column. Liquid fertilizers are highly recommended.</li>
+                <li><b>Light:</b> Low light is preferred. If using high light, ensure it is shaded by taller plants to prevent algae growth on leaves.</li>
+                <li><b>Water Chemistry:</b> Extremely adaptable, but thrives in slightly acidic to neutral water with moderate hardness.</li>
+            </ul>
+        </div>
+
+        <div class="section-card">
+            <h3>How to Propagate</h3>
+            <ul class="care-list">
+                <li><b>Splitting:</b> Simply cut the rhizome with sharp scissors into two or more pieces. Ensure each piece has at least 3-4 leaves.</li>
+                <li><b>Attachment:</b> Use <i>Cyanoacrylate</i> based superglue (gel) or dark sewing thread to secure it to your hardscape.</li>
+                <li><b>Placement:</b> Position in areas with moderate water flow to ensure nutrients reach the leaves and prevent detritus buildup.</li>
+            </ul>
+        </div>
+
+        <div class="section-card" style="border-left: 5px solid #4A9E9E;">
+            <h3 style="border:none; margin-bottom: 5px;">✅ Is this for you?</h3>
+            <ul class="care-list" style="list-style-type: '✔ '; padding-left: 25px;">
+                <li>You want a plant that is basically "unkillable."</li>
+                <li>You have a low-tech setup without CO2.</li>
+                <li>You have plant-eating fish like Cichlids.</li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            &copy; 2026 EASE-AQUATICS&trade;<br>
+            PRETORIA, SOUTH AFRICA
+        </div>
+    </div>
+</body>
+</html>
