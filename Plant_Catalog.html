@@ -1,109 +1,103 @@
-
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="google-site-verification" content="4l6Nw0FYwYSQwrjtu76XK5Lddn_g4j6VqGvopGlWchw" />
-        <title>Ease-Aquatics | Premium Aquarium Plants & Live Feed</title>
-        <meta name="description" content="Welcome to Ease-Aquatics. We provide high-quality, locally grown aquarium plants and live feed cultures based in Gauteng, South Africa. Built for healthy aquascapes.">
-        
-        <style>
-            body { font-family: 'Inter', sans-serif; background: #0F0F0F; color: #E0E0E0; padding: 40px; }
-            .container { max-width: 900px; margin: auto; }
-            .header { text-align: center; margin-bottom: 50px; }
-            .logo { max-width: 180px; }
-            
-            .search-box {
-                width: 100%; padding: 15px; border-radius: 8px; border: 1px solid rgba(105, 201, 201, 0.2);
-                background: #1A1A1A; color: white; margin-bottom: 30px; outline: none; box-sizing: border-box;
-            }
-
-            /* Layout with Image */
-            .plant-card { 
-                display: flex; gap: 25px; background: #1A1A1A; 
-                padding: 20px; border-radius: 12px; margin-bottom: 20px;
-                border: 1px solid rgba(255,255,255,0.03); transition: 0.3s ease;
-            }
-            .plant-card:hover { border-color: #69C9C9; }
-
-            .plant-img-container {
-                flex: 0 0 180px; height: 180px; border-radius: 8px; overflow: hidden;
-                border: 1px solid rgba(105, 201, 201, 0.2);
-            }
-            .plant-img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s ease; }
-            .plant-card:hover .plant-img { transform: scale(1.1); }
-
-            .plant-info { flex: 1; }
-            h2 { color: #69C9C9; margin: 0 0 10px 0; font-size: 1.4rem; }
-            .badge { 
-                padding: 3px 10px; border-radius: 4px; font-size: 0.7rem; font-weight: 700;
-                background: rgba(105, 201, 201, 0.1); color: #69C9C9;
-                border: 1px solid rgba(105, 201, 201, 0.2); margin-right: 5px; text-transform: uppercase;
-            }
-            .description { color: #888888; font-size: 0.9rem; margin: 15px 0; line-height: 1.5; }
-            
-            .spec-list { 
-                display: flex; list-style: none; padding: 10px 0 0 0; margin: 0; 
-                font-size: 0.8rem; border-top: 1px solid rgba(255,255,255,0.05); gap: 15px;
-            }
-            .spec-list li strong { color: #69C9C9; }
-
-            .footer { text-align: center; color: #888888; margin-top: 60px; font-size: 0.7rem; letter-spacing: 2px; }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="header"><img src="SimpleLogo.jpg" class="logo"></div>
-            <input type="text" id="searchInput" class="search-box" placeholder="Search Ease-Aquatics Inventory..." onkeyup="filter()">
-
-            <div id="grid">
-    
-                <div class="plant-card">
-                    <div class="plant-img-container">
-                        <img src="monte_carlo.jpg" alt="Micranthemum tweediei 'Monte Carlo'" class="plant-img">
-                    </div>
-                    <div class="plant-info">
-                        <h2>Micranthemum tweediei 'Monte Carlo'</h2>
-                        <div>
-                            <span class="badge">Diff: Medium</span>
-                            <span class="badge">Light: High</span>
-                            <span class="badge">CO2: High</span>
-                        </div>
-                        <p class="description">A premier carpeting plant that creates a dense, vibrant green floor. Essential for high-end aquascaping.</p>
-                        <ul class="spec-list"><li><strong>Temp:</strong> 20-28°C</li><li><strong>Growth:</strong> Fast</li><li><strong>pH:</strong> 6.0-7.5</li></ul>
-                    </div>
-                </div>
-        
-                <div class="plant-card">
-                    <div class="plant-img-container">
-                        <img src="pogo_helferi.jpg" alt="Pogostemon helferi" class="plant-img">
-                    </div>
-                    <div class="plant-info">
-                        <h2>Pogostemon helferi</h2>
-                        <div>
-                            <span class="badge">Diff: Medium</span>
-                            <span class="badge">Light: Med/High</span>
-                            <span class="badge">CO2: Required</span>
-                        </div>
-                        <p class="description">Distinctive star-shaped leaves. Adds a unique architectural texture to any hardscape transition.</p>
-                        <ul class="spec-list"><li><strong>Temp:</strong> 22-30°C</li><li><strong>Growth:</strong> Medium</li><li><strong>pH:</strong> 6.0-7.2</li></ul>
-                    </div>
-                </div>
-        
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Ease-Aquatics | Premium Aquarium Plants & Live Feed</title>
+<meta name="description" content="Welcome to Ease-Aquatics. We provide high-quality, locally grown aquarium plants and live feed cultures based in Gauteng, South Africa. Built for healthy aquascapes.">
+<style>
+body { font-family: 'Inter', -apple-system, sans-serif; background: #F2F2F7; color: #1C1C1E; margin: 0; padding: 15px; overflow-x: hidden; }
+.container { max-width: 600px; margin: auto; }
+.logo { max-width: 140px; display: block; margin: 10px auto 25px auto; transition: opacity 0.2s; }
+.logo:hover { opacity: 0.8; }
+.search-box { width: 100%; padding: 16px; border-radius: 12px; border: 1px solid #D1D1D6; background: #FFFFFF; margin-bottom: 20px; outline: none; box-sizing: border-box; font-size: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+.plant-card { display: flex; align-items: center; gap: 12px; background: #FFFFFF; padding: 12px; border-radius: 14px; margin-bottom: 12px; border: 1px solid #D1D1D6; text-decoration: none; color: inherit; box-shadow: 0 4px 6px rgba(0,0,0,0.02); transition: 0.2s; }
+.thumb { width: 75px; height: 75px; border-radius: 10px; object-fit: cover; background: #eee; flex-shrink: 0; }
+.card-content h2 { margin: 0; font-size: 1rem; line-height: 1.2; word-break: break-word; }
+.card-content p { margin: 3px 0 0 0; color: #636366; font-size: 0.8rem; line-height: 1.3; }
+.footer { text-align: center; color: #636366; margin-top: 50px; font-size: 0.75rem; padding-bottom: 30px; }
+</style>
+</head>
+<body>
+<div class="container">
+    <a href="/">
+        <img src="/img/SimpleLogo.png" class="logo" alt="Ease-Aquatics Home">
+    </a>
+    <input type="text" id="s" class="search-box" placeholder="Search catalog..." onkeyup="filter()">
+    <div id="g">
+        <a href="/monte-carlo/" class="plant-card">
+            <img src="/img/monte_carlo.jpg" class="thumb">
+            <div class="card-content">
+                <h2>Micranthemum tweediei 'Monte Carlo'</h2>
+                <p>The ultimate carpeting plant for high-end scapes.</p>
             </div>
-            <div class="footer">EASE-AQUATICS™ | PREMIUM BOTANICALS</div>
-        </div>
-        <script>
-            function filter() {
-                let val = document.getElementById('searchInput').value.toLowerCase();
-                let cards = document.getElementsByClassName('plant-card');
-                for (let card of cards) {
-                    let name = card.getElementsByTagName('h2')[0].innerText.toLowerCase();
-                    card.style.display = name.includes(val) ? "flex" : "none";
-                }
-            }
-        </script>
-    </body>
-    </html>
-    
+        </a>
+        <a href="/pogo-helferi/" class="plant-card">
+            <img src="/img/pogo_helferi.jpg" class="thumb">
+            <div class="card-content">
+                <h2>Pogostemon helferi</h2>
+                <p>A unique star-shaped architectural plant.</p>
+            </div>
+        </a>
+        <a href="/crypt-wendtii/" class="plant-card">
+            <img src="/img/crypt_wendtii.jpg" class="thumb">
+            <div class="card-content">
+                <h2>Cryptocoryne wendtii 'Compact'</h2>
+                <p>Hardy midground plant with bronze/green tones.</p>
+            </div>
+        </a>
+        <a href="/anubias-nana-petite/" class="plant-card">
+            <img src="/img/anubias_petite.jpg" class="thumb">
+            <div class="card-content">
+                <h2>Anubias barteri var. Nana Petite</h2>
+                <p>Tiny epiphyte perfect for hardscape detailing.</p>
+            </div>
+        </a>
+        <a href="/crypt-flamingo/" class="plant-card">
+            <img src="/img/crypt_flamingo.jpg" class="thumb">
+            <div class="card-content">
+                <h2>Cryptocoryne sp. 'Flamingo'</h2>
+                <p>Rare cultivar with stunning pink coloration.</p>
+            </div>
+        </a>
+        <a href="/hairgrass-mini/" class="plant-card">
+            <img src="/img/hairgrass.jpg" class="thumb">
+            <div class="card-content">
+                <h2>Eleocharis acicularis 'Mini'</h2>
+                <p>Classic grass-like carpet that stays very low.</p>
+            </div>
+        </a>
+        <a href="/staurogyne-repens/" class="plant-card">
+            <img src="/img/s_repens.jpg" class="thumb">
+            <div class="card-content">
+                <h2>Staurogyne repens</h2>
+                <p>Hardy, bushy green foreground plant.</p>
+            </div>
+        </a>
+        <a href="/rotala-green/" class="plant-card">
+            <img src="/img/rotala_green.jpg" class="thumb">
+            <div class="card-content">
+                <h2>Rotala rotundifolia 'Green'</h2>
+                <p>Bright green stem plant for lush backgrounds.</p>
+            </div>
+        </a>
+        <a href="/weeping-moss/" class="plant-card">
+            <img src="/img/weeping_moss.jpg" class="thumb">
+            <div class="card-content">
+                <h2>Vesicularia ferriei 'Weeping' Moss</h2>
+                <p>Drooping moss that creates a 'weeping' effect.</p>
+            </div>
+        </a>
+    </div>
+    <div class="footer">EASE-AQUATICS&trade; | GAUTENG</div>
+</div>
+<script>
+function filter(){
+    let v=document.getElementById('s').value.toLowerCase();
+    for(let c of document.getElementsByClassName('plant-card')) {
+        c.style.display = c.innerText.toLowerCase().includes(v) ? 'flex' : 'none';
+    }
+}
+</script>
+</body>
+</html>
