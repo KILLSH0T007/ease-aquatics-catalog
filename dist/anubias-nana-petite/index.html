@@ -14,9 +14,9 @@
             --border-color: #E2E8F0;
             --text-main: #0F172A;
             --text-muted: #475569;
-            --accent: #06B6D4; /* Vibrant Cyan */
+            --accent: #06B6D4;
             --accent-dark: #0891B2;
-            --accent-bg: #ECFEFF; /* Soft highlight cyan */
+            --accent-bg: #ECFEFF;
             --accent-glow: rgba(6, 182, 212, 0.08);
             --radius-card: 20px;
             --radius-inner: 12px;
@@ -35,17 +35,38 @@
             line-height: 1.6;
         }
 
-        .container { max-width: 650px; margin: auto; }
+        /* Upgraded Layout Container for Master Grid */
+        .container { 
+            max-width: 1000px; 
+            margin: auto; 
+        }
 
         .logo { 
             max-width: 140px; 
             display: block; 
-            margin: 0 auto 25px auto; 
-            transition: transform 0.3s ease; 
+            margin: 0 auto 30px auto; 
         }
-        .logo:hover { transform: scale(1.03); }
 
-        /* Premium Floating Navigation Back Button */
+        /* 2-Column Core Architecture */
+        .main-layout {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        /* Fixed Left Column for Zero-Scroll Visuals */
+        .left-column {
+            position: sticky;
+            top: 20px;
+        }
+
+        .right-column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
         .btn-back { 
             display: inline-flex; 
             align-items: center; 
@@ -58,52 +79,44 @@
             background: var(--bg-secondary); 
             border: 1px solid var(--border-color); 
             border-radius: 12px; 
-            margin-bottom: 25px; 
+            margin-bottom: 20px; 
             box-shadow: 0 4px 12px rgba(15, 23, 42, 0.02);
             transition: all 0.2s ease;
         }
         .btn-back:hover {
             color: var(--accent-dark);
             border-color: var(--accent);
-            box-shadow: 0 4px 15px var(--accent-glow);
             transform: translateX(-2px);
         }
 
-        /* Title Area Styling */
-        .title-area {
-            margin-bottom: 20px;
-        }
+        .title-area { margin-bottom: 20px; }
         h1 { 
             font-size: 1.8rem; 
             font-weight: 700;
             line-height: 1.2; 
             margin: 0 0 4px 0; 
             letter-spacing: -0.02em;
-            color: var(--text-main); 
         }
         .scientific-name { 
             font-style: italic; 
             color: var(--text-muted); 
             font-size: 0.95rem; 
-            font-weight: 500;
-            display: block; 
         }
         
+        /* Perfectly Scaled Photo Framework */
         .hero-img { 
             width: 100%; 
-            height: auto; 
+            max-height: 380px;
+            object-fit: cover;
             border-radius: var(--radius-card); 
             border: 1px solid var(--border-color); 
-            margin-bottom: 25px; 
             box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04); 
         }
         
-        /* Modernized Specifications Layout */
         .spec-grid { 
             display: grid; 
             grid-template-columns: repeat(3, 1fr); 
             gap: 12px; 
-            margin-bottom: 25px; 
         }
         .spec-item { 
             background: var(--bg-secondary); 
@@ -114,11 +127,9 @@
             flex-direction: column; 
             align-items: center;
             text-align: center;
-            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.01);
         }
         .spec-label { 
             color: var(--text-muted); 
-            size: 0.7rem;
             font-size: 0.65rem; 
             text-transform: uppercase; 
             font-weight: 700; 
@@ -131,13 +142,11 @@
             font-size: 0.9rem; 
         }
 
-        /* Content Blocks */
         .section-card { 
             background: var(--bg-secondary); 
             padding: 24px; 
             border-radius: var(--radius-card); 
             border: 1px solid var(--border-color); 
-            margin-bottom: 20px; 
             box-shadow: 0 4px 20px rgba(15, 23, 42, 0.015); 
         }
         
@@ -145,66 +154,23 @@
             margin-top: 0; 
             font-size: 1.15rem; 
             font-weight: 700;
-            color: var(--text-main); 
             border-bottom: 2px solid var(--bg-primary); 
             padding-bottom: 12px; 
             margin-bottom: 16px; 
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
 
-        /* Specialized Highlight Feature Card */
-        .feature-card {
-            background: var(--accent-bg); 
-            border-color: rgba(6, 182, 212, 0.2);
-        }
-        .feature-card h3 { 
-            color: var(--accent-dark); 
-            border-bottom-color: rgba(6, 182, 212, 0.1);
-        }
-        .feature-card p { 
-            font-size: 0.95rem; 
-            color: #164E63; 
-            margin: 0; 
-        }
+        .feature-card { background: var(--accent-bg); border-color: rgba(6, 182, 212, 0.2); }
+        .feature-card h3 { color: var(--accent-dark); border-bottom-color: rgba(6, 182, 212, 0.1); }
+        .feature-card p { font-size: 0.95rem; color: #164E63; margin: 0; }
 
-        /* Beautiful Human-Friendly Lists */
-        .care-list { 
-            list-style: none;
-            padding: 0; 
-            margin: 0; 
-        }
-        .care-list li { 
-            position: relative;
-            padding-left: 24px;
-            margin-bottom: 14px; 
-            font-size: 0.95rem; 
-            color: var(--text-muted); 
-        }
+        .care-list { list-style: none; padding: 0; margin: 0; }
+        .care-list li { position: relative; padding-left: 24px; margin-bottom: 14px; font-size: 0.95rem; color: var(--text-muted); }
         .care-list li:last-child { margin-bottom: 0; }
-        
-        /* Custom Cyan List Bullets */
-        .care-list li::before {
-            content: "•";
-            color: var(--accent);
-            font-size: 1.4rem;
-            position: absolute;
-            left: 4px;
-            top: -2px;
-        }
+        .care-list li::before { content: "•"; color: var(--accent); font-size: 1.4rem; position: absolute; left: 4px; top: -2px; }
         .care-list b { color: var(--text-main); font-weight: 600; }
 
-        /* Checklist Card Variations */
-        .checklist-card {
-            border-left: 4px solid var(--accent);
-        }
-        .checklist-list li::before {
-            content: "✓";
-            font-size: 0.95rem;
-            font-weight: 700;
-            top: 0;
-        }
+        .checklist-card { border-left: 4px solid var(--accent); }
+        .checklist-list li::before { content: "✓"; font-size: 0.95rem; font-weight: 700; top: 0; }
 
         .footer { 
             text-align: center; 
@@ -215,29 +181,36 @@
             padding-bottom: 40px; 
             text-transform: uppercase;
             font-weight: 700;
-            line-height: 1.5;
         }
         .footer-accent { color: var(--accent-dark); }
 
         /* ==========================================================================
-           RESPONSIVE RE-LAYOUTS (MOBILE & TABLET)
+           PERFECT MOBILE ADAPTATION
            ========================================================================== */
-        @media (max-width: 580px) {
+        @media (max-width: 850px) {
             body { padding: 20px 14px; }
             
-            h1 { font-size: 1.55rem; }
-            .scientific-name { font-size: 0.88rem; }
+            /* Break the layout into a vertical stacking view instantly on smaller viewports */
+            .main-layout {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
             
-            /* Shifts from 3 side-by-side to 2 columns on phones to stay perfectly clear */
+            .left-column {
+                position: relative;
+                top: 0;
+            }
+            
+            .hero-img {
+                max-height: 300px;
+            }
+
             .spec-grid { 
                 grid-template-columns: repeat(2, 1fr); 
                 gap: 10px; 
             }
-            .spec-item { padding: 12px 10px; }
             
             .section-card { padding: 18px; }
-            h3 { font-size: 1.05rem; margin-bottom: 12px; }
-            .care-list li { font-size: 0.9rem; margin-bottom: 12px; }
         }
     </style>
 </head>
@@ -247,68 +220,76 @@
             <img src="/img/SimpleLogo.png" class="logo" alt="Ease-Aquatics">
         </a>
         
-        <a href="/" class="btn-back">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg> Back to Catalog
-        </a>
+        <div class="main-layout">
+            <!-- LEFT HAND CONTAINER (Pins Photo & Title Content) -->
+            <div class="left-column">
+                <a href="/" class="btn-back">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg> Back to Catalog
+                </a>
 
-        <div class="title-area">
-            <h1>Anubias Nana Petite</h1>
-            <span class="scientific-name">Anubias barteri var. nana 'Petite'</span>
-        </div>
-        
-        <img src="/img/anubias_petite.jpg" class="hero-img" alt="Anubias Nana Petite">
+                <div class="title-area">
+                    <h1>Anubias Nana Petite</h1>
+                    <span class="scientific-name">Anubias barteri var. nana 'Petite'</span>
+                </div>
+                
+                <img src="/img/anubias_petite.jpg" class="hero-img" alt="Anubias Nana Petite">
+            </div>
 
-        <div class="spec-grid">
-            <div class="spec-item"><span class="spec-label">Difficulty</span><span class="spec-value">Beginner</span></div>
-            <div class="spec-item"><span class="spec-label">Growth Rate</span><span class="spec-value">Very Slow</span></div>
-            <div class="spec-item"><span class="spec-label">Light Needs</span><span class="spec-value">Low - Med</span></div>
-            <div class="spec-item"><span class="spec-label">CO2 Needed</span><span class="spec-value">Optional</span></div>
-            <div class="spec-item"><span class="spec-label">Optimal pH</span><span class="spec-value">6.0 - 7.5</span></div>
-            <div class="spec-item"><span class="spec-label">Placement</span><span class="spec-value">Hardscape</span></div>
-        </div>
+            <!-- RIGHT HAND CONTAINER (Scrolls Naturally alongside side panel) -->
+            <div class="right-column">
+                <div class="spec-grid">
+                    <div class="spec-item"><span class="spec-label">Difficulty</span><span class="spec-value">Beginner</span></div>
+                    <div class="spec-item"><span class="spec-label">Growth Rate</span><span class="spec-value">Very Slow</span></div>
+                    <div class="spec-item"><span class="spec-label">Light Needs</span><span class="spec-value">Low - Med</span></div>
+                    <div class="spec-item"><span class="spec-label">CO2 Needed</span><span class="spec-value">Optional</span></div>
+                    <div class="spec-item"><span class="spec-label">Optimal pH</span><span class="spec-value">6.0 - 7.5</span></div>
+                    <div class="spec-item"><span class="spec-label">Placement</span><span class="spec-value">Hardscape</span></div>
+                </div>
 
-        <div class="section-card feature-card">
-            <h3>✨ Why Ease-Aquatics Anubias?</h3>
-            <p>
-                Our Petite Anubias is <b>fully acclimated</b> and algae-free. Because it is grown in local Pretoria conditions, it is incredibly resilient to the typical "Anubias Rot" seen in fresh imports. It is the perfect "set and forget" plant for busy scapers.
-            </p>
-        </div>
+                <div class="section-card feature-card">
+                    <h3>✨ Why Ease-Aquatics Anubias?</h3>
+                    <p>
+                        Our Petite Anubias is <b>fully acclimated</b> and algae-free. Because it is grown in local Pretoria conditions, it is incredibly resilient to the typical "Anubias Rot" seen in fresh imports. It is the perfect "set and forget" plant for busy scapers.
+                    </p>
+                </div>
 
-        <div class="section-card">
-            <h3>Advanced Technical Info</h3>
-            <ul class="care-list">
-                <li><b>Rhizome Management:</b> ⚠️ <b>Critical:</b> Do not bury the horizontal thick stem (rhizome) in soil. It will rot. Glue or tie it to rocks/wood instead.</li>
-                <li><b>Algae Protection:</b> Because it grows slowly, it can catch spot algae under high light. Place in shaded areas for a pristine look.</li>
-                <li><b>Fish Compatibility:</b> The leaves are thick and "leathery," making it one of the few plants <b>Goldfish and Cichlid safe</b>.</li>
-                <li><b>The "Petite" Advantage:</b> It stays tiny. One of the best plants for creating "scale" in nano tanks or detailing large scapes.</li>
-            </ul>
-        </div>
+                <div class="section-card">
+                    <h3>Advanced Technical Info</h3>
+                    <ul class="care-list">
+                        <li><b>Rhizome Management:</b> ⚠️ <b>Critical:</b> Do not bury the horizontal thick stem (rhizome) in soil. It will rot. Glue or tie it to rocks/wood instead.</li>
+                        <li><b>Algae Protection:</b> Because it grows slowly, it can catch spot algae under high light. Place in shaded areas for a pristine look.</li>
+                        <li><b>Fish Compatibility:</b> The leaves are thick and "leathery," making it one of the few plants <b>Goldfish and Cichlid safe</b>.</li>
+                        <li><b>The "Petite" Advantage:</b> It stays tiny. One of the best plants for creating "scale" in nano tanks or detailing large scapes.</li>
+                    </ul>
+                </div>
 
-        <div class="section-card">
-            <h3>Care & Maintenance</h3>
-            <ul class="care-list">
-                <li><b>Feeding:</b> As an epiphyte, it takes nutrients from the water column. Liquid fertilizers are highly recommended.</li>
-                <li><b>Light:</b> Low light is preferred. If using high light, ensure it is shaded by taller plants to prevent algae growth on leaves.</li>
-                <li><b>Water Chemistry:</b> Extremely adaptable, but thrives in slightly acidic to neutral water with moderate hardness.</li>
-            </ul>
-        </div>
+                <div class="section-card">
+                    <h3>Care & Maintenance</h3>
+                    <ul class="care-list">
+                        <li><b>Feeding:</b> As an epiphyte, it takes nutrients from the water column. Liquid fertilizers are highly recommended.</li>
+                        <li><b>Light:</b> Low light is preferred. If using high light, ensure it is shaded by taller plants to prevent algae growth on leaves.</li>
+                        <li><b>Water Chemistry:</b> Extremely adaptable, but thrives in slightly acidic to neutral water with moderate hardness.</li>
+                    </ul>
+                </div>
 
-        <div class="section-card">
-            <h3>How to Propagate</h3>
-            <ul class="care-list">
-                <li><b>Splitting:</b> Simply cut the rhizome with sharp scissors into two or more pieces. Ensure each piece has at least 3-4 leaves.</li>
-                <li><b>Attachment:</b> Use <i>Cyanoacrylate</i> based superglue (gel) or dark sewing thread to secure it to your hardscape.</li>
-                <li><b>Placement:</b> Position in areas with moderate water flow to ensure nutrients reach the leaves and prevent detritus buildup.</li>
-            </ul>
-        </div>
+                <div class="section-card">
+                    <h3>How to Propagate</h3>
+                    <ul class="care-list">
+                        <li><b>Splitting:</b> Simply cut the rhizome with sharp scissors into two or more pieces. Ensure each piece has at least 3-4 leaves.</li>
+                        <li><b>Attachment:</b> Use <i>Cyanoacrylate</i> based superglue (gel) or dark sewing thread to secure it to your hardscape.</li>
+                        <li><b>Placement:</b> Position in areas with moderate water flow to ensure nutrients reach the leaves and prevent detritus buildup.</li>
+                    </ul>
+                </div>
 
-        <div class="section-card checklist-card">
-            <h3>✅ Is this for you?</h3>
-            <ul class="care-list checklist-list">
-                <li>You want a plant that is basically "unkillable."</li>
-                <li>You have a low-tech setup without CO2.</li>
-                <li>You have plant-eating fish like Cichlids.</li>
-            </ul>
+                <div class="section-card checklist-card">
+                    <h3>✅ Is this for you?</h3>
+                    <ul class="care-list checklist-list">
+                        <li>You want a plant that is basically "unkillable."</li>
+                        <li>You have a low-tech setup without CO2.</li>
+                        <li>You have plant-eating fish like Cichlids.</li>
+                    </ul>
+                </div>
+            </div>
         </div>
 
         <div class="footer">
