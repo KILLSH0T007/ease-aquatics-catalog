@@ -6,6 +6,9 @@
 <meta name="google-site-verification" content="4l6Nw0FYwYSQwrjtu76XK5Lddn_g4j6VqGvopGlWchw" />
 <title>Ease-Aquatics | Premium Aquarium Plants & Live Feed</title>
 <meta name="description" content="Welcome to Ease-Aquatics. We provide high-quality, locally grown aquarium plants and live feed cultures based in Gauteng, South Africa. Built for healthy aquascapes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -16,159 +19,275 @@
 </script>       
 <style>
 :root {
-  --bg-primary: #F6F8FA;
+  --bg-primary: #F8FAFC;
   --bg-secondary: #FFFFFF;
-  --border-color: #E1E4E8;
-  --text-main: #24292E;
-  --text-muted: #586069;
-  --accent: #2E7D7D;
-  --accent-glow: rgba(46, 125, 125, 0.1);
+  --border-color: #E2E8F0;
+  --text-main: #0F172A;
+  --text-muted: #475569;
+  --accent: #14B8A6;
+  --accent-dark: #0D9488;
+  --accent-glow: rgba(20, 184, 166, 0.08);
+  --radius-card: 20px;
+  --radius-thumb: 14px;
 }
 
 body { 
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; 
-  background: var(--bg-primary); 
+  font-family: 'Plus Jakarta Sans', -apple-system, sans-serif; 
+  background: var(--bg-primary);
+  background-image: radial-gradient(#CBD5E1 1px, transparent 1px);
+  background-size: 24px 24px;
   color: var(--text-main); 
   margin: 0; 
-  padding: 20px 15px; 
+  padding: 40px 20px; 
   overflow-x: hidden; 
   -webkit-font-smoothing: antialiased;
 }
 
-.container { max-width: 650px; margin: auto; }
+.container { max-width: 680px; margin: auto; }
+
+.header-section {
+  text-align: center;
+  margin-bottom: 40px;
+}
 
 .logo { 
-  max-width: 150px; 
+  max-width: 160px; 
   display: block; 
-  margin: 15px auto 35px auto; 
-  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+  margin: 0 auto 12px auto; 
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
 }
-.logo:hover { transform: scale(1.03); }
+.logo:hover { transform: scale(1.05) rotate(-1deg); }
+
+.tagline {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-weight: 600;
+  margin: 0;
+}
 
 .search-container {
   position: relative;
-  margin-bottom: 25px;
+  margin-bottom: 35px;
 }
 
 .search-box { 
   width: 100%; 
-  padding: 16px 16px 16px 45px; 
-  border-radius: 14px; 
+  padding: 18px 20px 18px 52px; 
+  border-radius: 16px; 
   border: 1px solid var(--border-color); 
   background: var(--bg-secondary); 
   color: var(--text-main);
   outline: none; 
   box-sizing: border-box; 
   font-size: 1rem; 
-  transition: all 0.25s ease;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.02);
 }
 
 .search-box:focus {
   border-color: var(--accent);
-  box-shadow: 0 0 0 4px var(--accent-glow);
+  box-shadow: 0 0 0 5px var(--accent-glow), 0 10px 25px rgba(20, 184, 166, 0.05);
+  transform: translateY(-1px);
 }
 
 .search-container::before {
   content: '🔍';
   position: absolute;
-  left: 16px;
-  top: 50%;
+  left: 20px;
+  top: 52%;
   transform: translateY(-50%);
-  font-size: 0.95rem;
-  opacity: 0.4;
+  font-size: 1.1rem;
+  opacity: 0.5;
+  transition: opacity 0.3s;
+}
+.search-container:focus-within::before {
+  opacity: 0.9;
 }
 
 .catalog-grid {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
 }
 
 .plant-card { 
-  display: flex; 
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   align-items: center; 
-  gap: 16px; 
+  gap: 20px; 
   background: var(--bg-secondary); 
-  padding: 14px; 
-  border-radius: 16px; 
+  padding: 16px; 
+  border-radius: var(--radius-card); 
   border: 1px solid var(--border-color); 
   text-decoration: none; 
   color: inherit; 
-  transition: all 0.2s ease; 
-  box-shadow: 0 4px 12px rgba(0,0,0,0.015);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+  box-shadow: 0 4px 18px rgba(15, 23, 42, 0.015);
 }
 
 .plant-card:hover {
-  transform: translateY(-1px);
+  transform: translateY(-3px) scale(1.01);
   border-color: var(--accent);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06), 0 0 0 1px var(--accent-glow);
+}
+
+.thumb-wrapper {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: var(--radius-thumb);
 }
 
 .thumb { 
-  width: 80px; 
-  height: 80px; 
-  border-radius: 12px; 
+  width: 100%; 
+  height: 100%; 
   object-fit: cover; 
-  background: #E1E4E8; 
-  flex-shrink: 0; 
-  border: 1px solid rgba(0,0,0,0.03);
+  background: #F1F5F9; 
+  transition: transform 0.5s ease;
+}
+
+.plant-card:hover .thumb {
+  transform: scale(1.08);
 }
 
 .card-content {
-  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.plant-badge {
+  align-self: flex-start;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: #F1F5F9;
+  color: var(--text-muted);
+  margin-bottom: 2px;
+}
+
+.plant-card:hover .plant-badge {
+  background: var(--accent-glow);
+  color: var(--accent-dark);
 }
 
 .card-content h2 { 
   margin: 0; 
-  font-size: 1.05rem; 
-  font-weight: 600;
+  font-size: 1.15rem; 
+  font-weight: 700;
   line-height: 1.3; 
   word-break: break-word; 
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
+  color: var(--text-main);
 }
 
 .card-content p { 
-  margin: 5px 0 0 0; 
+  margin: 0; 
   color: var(--text-muted); 
-  font-size: 0.88rem; 
+  font-size: 0.9rem; 
   line-height: 1.4; 
 }
 
-.plant-card::after {
-  content: '→';
-  font-size: 1.1rem;
-  color: var(--text-muted);
-  transition: all 0.2s ease;
-  padding-right: 5px;
-  opacity: 0;
-  transform: translateX(-5px);
+.arrow-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #F8FAFC;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
 }
 
-.plant-card:hover::after {
-  opacity: 1;
-  color: var(--accent);
-  transform: translateX(0);
+.arrow-circle span {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  transition: transform 0.3s ease;
+}
+
+.plant-card:hover .arrow-circle {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.plant-card:hover .arrow-circle span {
+  color: #FFFFFF;
+  transform: translateX(2px);
 }
 
 .footer { 
   text-align: center; 
   color: var(--text-muted); 
-  margin-top: 60px; 
-  font-size: 0.78rem; 
-  letter-spacing: 0.15em;
+  margin-top: 80px; 
+  font-size: 0.8rem; 
+  letter-spacing: 0.2em;
   padding-bottom: 40px; 
   text-transform: uppercase;
-  font-weight: 600;
-  opacity: 0.8;
+  font-weight: 700;
+}
+
+.footer-accent {
+  color: var(--accent-dark);
+}
+
+/* ==========================================================================
+   MOBILE & TABLET BREAKPOINTS (10/10 RESPONSIVENESS)
+   ========================================================================== */
+@media (max-width: 580px) {
+  body {
+    padding: 25px 12px;
+    background-size: 18px 18px; /* Scale down dot grid slightly on small screens */
+  }
+  
+  .header-section { margin-bottom: 30px; }
+  .logo { max-width: 130px; }
+  
+  .search-box {
+    padding: 15px 16px 15px 44px;
+    font-size: 0.95rem;
+  }
+  .search-container::before { left: 16px; font-size: 1rem; }
+
+  .plant-card {
+    /* Reorganize columns on tight screens so text has maximum room */
+    grid-template-columns: auto 1fr; 
+    gap: 14px;
+    padding: 12px;
+    border-radius: 16px;
+  }
+
+  .thumb-wrapper {
+    width: 75px;
+    height: 75px;
+    border-radius: 10px;
+  }
+
+  .card-content h2 { font-size: 1.05rem; }
+  .card-content p { font-size: 0.82rem; }
+  .plant-badge { font-size: 0.62rem; padding: 2px 6px; }
+
+  /* Hide the right arrow icon circle on small screens to save valuable horizontal view width */
+  .arrow-circle { display: none; }
 }
 </style>
 </head>
 <body>
 <div class="container">
-    <a href="/">
-        <img src="/img/SimpleLogo.png" class="logo" alt="Ease-Aquatics Home">
-    </a>
+    <div class="header-section">
+        <a href="/">
+            <img src="/img/SimpleLogo.png" class="logo" alt="Ease-Aquatics Home">
+        </a>
+        <p class="tagline">Premium Plant Catalog</p>
+    </div>
     
     <div class="search-container">
         <input type="text" id="s" class="search-box" placeholder="Search premium plants..." onkeyup="filter()">
@@ -176,77 +295,114 @@ body {
     
     <div id="g" class="catalog-grid">
         <a href="/monte-carlo/" class="plant-card">
-            <img src="/img/monte_carlo.jpg" class="thumb" alt="Monte Carlo">
+            <div class="thumb-wrapper">
+                <img src="/img/monte_carlo.jpg" class="thumb" alt="Monte Carlo">
+            </div>
             <div class="card-content">
+                <span class="plant-badge">Foreground / Carpet</span>
                 <h2>Micranthemum tweediei 'Monte Carlo'</h2>
                 <p>The ultimate carpeting plant for high-end scapes.</p>
             </div>
+            <div class="arrow-circle"><span>→</span></div>
         </a>
         <a href="/pogo-helferi/" class="plant-card">
-            <img src="/img/pogo_helferi.jpg" class="thumb" alt="Pogostemon helferi">
+            <div class="thumb-wrapper">
+                <img src="/img/pogo_helferi.jpg" class="thumb" alt="Pogostemon helferi">
+            </div>
             <div class="card-content">
+                <span class="plant-badge">Midground / Accent</span>
                 <h2>Pogostemon helferi</h2>
                 <p>A unique star-shaped architectural plant.</p>
             </div>
+            <div class="arrow-circle"><span>→</span></div>
         </a>
         <a href="/crypt-wendtii/" class="plant-card">
-            <img src="/img/crypt_wendtii.jpg" class="thumb" alt="Cryptocoryne wendtii">
+            <div class="thumb-wrapper">
+                <img src="/img/crypt_wendtii.jpg" class="thumb" alt="Cryptocoryne wendtii">
+            </div>
             <div class="card-content">
+                <span class="plant-badge">Midground / Low-Tech</span>
                 <h2>Cryptocoryne wendtii 'Compact'</h2>
                 <p>Hardy midground plant with bronze/green tones.</p>
             </div>
+            <div class="arrow-circle"><span>→</span></div>
         </a>
         <a href="/anubias-nana-petite/" class="plant-card">
-            <img src="/img/anubias_petite.jpg" class="thumb" alt="Anubias Nana Petite">
+            <div class="thumb-wrapper">
+                <img src="/img/anubias_petite.jpg" class="thumb" alt="Anubias Nana Petite">
+            </div>
             <div class="card-content">
+                <span class="plant-badge">Epiphyte / Hardscape</span>
                 <h2>Anubias barteri var. Nana Petite</h2>
                 <p>Tiny epiphyte perfect for hardscape detailing.</p>
             </div>
+            <div class="arrow-circle"><span>→</span></div>
         </a>
         <a href="/crypt-flamingo/" class="plant-card">
-            <img src="/img/crypt_flamingo.jpg" class="thumb" alt="Cryptocoryne Flamingo">
+            <div class="thumb-wrapper">
+                <img src="/img/crypt_flamingo.jpg" class="thumb" alt="Cryptocoryne Flamingo">
+            </div>
             <div class="card-content">
+                <span class="plant-badge">Rare Collector</span>
                 <h2>Cryptocoryne sp. 'Flamingo'</h2>
                 <p>Rare cultivar with stunning pink coloration.</p>
             </div>
+            <div class="arrow-circle"><span>→</span></div>
         </a>
         <a href="/hairgrass-mini/" class="plant-card">
-            <img src="/img/hairgrass.jpg" class="thumb" alt="Eleocharis Mini">
+            <div class="thumb-wrapper">
+                <img src="/img/hairgrass.jpg" class="thumb" alt="Eleocharis Mini">
+            </div>
             <div class="card-content">
+                <span class="plant-badge">Foreground / Carpet</span>
                 <h2>Eleocharis acicularis 'Mini'</h2>
                 <p>Classic grass-like carpet that stays very low.</p>
             </div>
+            <div class="arrow-circle"><span>→</span></div>
         </a>
         <a href="/staurogyne-repens/" class="plant-card">
-            <img src="/img/s_repens.jpg" class="thumb" alt="Staurogyne repens">
+            <div class="thumb-wrapper">
+                <img src="/img/s_repens.jpg" class="thumb" alt="Staurogyne repens">
+            </div>
             <div class="card-content">
+                <span class="plant-badge">Foreground / Bushy</span>
                 <h2>Staurogyne repens</h2>
                 <p>Hardy, bushy green foreground plant.</p>
             </div>
+            <div class="arrow-circle"><span>→</span></div>
         </a>
         <a href="/rotala-green/" class="plant-card">
-            <img src="/img/rotala_green.jpg" class="thumb" alt="Rotala Green">
+            <div class="thumb-wrapper">
+                <img src="/img/rotala_green.jpg" class="thumb" alt="Rotala Green">
+            </div>
             <div class="card-content">
+                <span class="plant-badge">Background / Stem</span>
                 <h2>Rotala rotundifolia 'Green'</h2>
                 <p>Bright green stem plant for lush backgrounds.</p>
             </div>
+            <div class="arrow-circle"><span>→</span></div>
         </a>
         <a href="/weeping-moss/" class="plant-card">
-            <img src="/img/weeping_moss.jpg" class="thumb" alt="Weeping Moss">
+            <div class="thumb-wrapper">
+                <img src="/img/weeping_moss.jpg" class="thumb" alt="Weeping Moss">
+            </div>
             <div class="card-content">
+                <span class="plant-badge">Moss / Hardscape</span>
                 <h2>Vesicularia ferriei 'Weeping' Moss</h2>
                 <p>Drooping moss that creates a 'weeping' effect.</p>
             </div>
+            <div class="arrow-circle"><span>→</span></div>
         </a>
     </div>
-    <div class="footer">EASE-AQUATICS&trade; | GAUTENG</div>
+    <div class="footer">EASE-AQUATICS&trade; | <span class="footer-accent">GAUTENG</span></div>
 </div>
 
 <script>
 function filter(){
     let v=document.getElementById('s').value.toLowerCase();
     for(let c of document.getElementsByClassName('plant-card')) {
-        c.style.display = c.innerText.toLowerCase().includes(v) ? 'flex' : 'none';
+        // Keeps script working flawlessly on both desktop 'grid' and mobile overrides
+        c.style.display = c.innerText.toLowerCase().includes(v) ? '' : 'none';
     }
 }
 </script>
