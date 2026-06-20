@@ -29,17 +29,17 @@
         background-size: 24px 24px;
         color: var(--text-main); 
         margin: 0; 
-        padding: 40px 0; /* Changed padding to 0 on sides to let container manage it */
+        padding: 40px 0;
         overflow-x: hidden; 
         -webkit-font-smoothing: antialiased;
         line-height: 1.6;
     }
 
-    /* Upgraded Layout Container for Master Grid */
+    /* Master Container with global side padding forced */
     .container { 
         max-width: 1000px; 
         margin: auto; 
-        padding: 0 24px; /* Essential safety gutters for desktop window sizing */
+        padding: 0 20px !important; /* Force a clear 20px safety gap from screen edges */
         box-sizing: border-box;
     }
 
@@ -57,7 +57,6 @@
         align-items: start;
     }
 
-    /* Fixed Left Column for Zero-Scroll Visuals */
     .left-column {
         position: sticky;
         top: 20px;
@@ -105,8 +104,10 @@
         font-size: 0.95rem; 
     }
     
+    /* Desktop Hero Image Setup */
     .hero-img { 
         width: 100%; 
+        height: auto;
         max-height: 380px;
         object-fit: cover;
         border-radius: var(--radius-card); 
@@ -186,44 +187,51 @@
     .footer-accent { color: var(--accent-dark); }
 
     /* ==========================================================================
-       FIXED MOBILE VIEWPORT RENDERING
+       aggressive mobile layout override 
        ========================================================================== */
     @media (max-width: 850px) {
         body { 
-            padding: 20px 0; 
+            padding: 15px 0; 
         }
 
         .container {
-            padding: 0 16px; /* Pulls content 16px away from glass display borders */
+            padding: 0 16px !important; /* Forces layout away from glass screen edge */
         }
         
         .main-layout {
-            grid-template-columns: 1fr;
+            grid-template-columns: 1fr !important;
             gap: 20px;
+            display: flex !important;
+            flex-direction: column;
         }
         
         .left-column {
-            position: relative;
-            top: 0;
+            position: relative !important;
+            top: 0 !important;
+            width: 100%;
         }
-        
+
+        /* Fixed Mobile Image Cutoff */
         .hero-img {
-            max-height: 280px;
-            border-radius: 16px; /* Smooth matching corners for small scales */
+            max-height: none !important; /* Removes height restrictions completely */
+            height: auto !important;     /* Lets the image scale down safely */
+            object-fit: contain !important; /* Prevents top/bottom clipping */
+            border-radius: 16px;
+            background: #ffffff; /* Gives white transparency padding if image shape varies */
         }
 
         .spec-grid { 
-            grid-template-columns: repeat(2, 1fr); 
+            grid-template-columns: repeat(2, 1fr) !important; 
             gap: 10px; 
         }
         
         .section-card { 
-            padding: 18px; 
+            padding: 16px !important; 
             border-radius: 16px;
         }
 
-        h1 { font-size: 1.6rem; }
-        h3 { padding-bottom: 8px; margin-bottom: 12px; font-size: 1.1rem; }
+        h1 { font-size: 1.5rem; }
+        h3 { padding-bottom: 8px; margin-bottom: 12px; font-size: 1.05rem; }
     }
 </style>
 </head>
