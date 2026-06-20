@@ -1,1 +1,18 @@
+# --- Virtual Environments ---
+env/
 venv/
+ENV/
+.env/
+.venv/
+
+# --- Python Bytecode & Cache ---
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+
+# --- Operating System Garbage ---
+.DS_Store
+Thumbs.db
